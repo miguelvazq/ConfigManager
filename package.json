@@ -1,0 +1,25 @@
+{
+  "name": "ts_react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server",
+    "build": "webpack"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/react": "^15.0.30",
+    "@types/react-dom": "^15.5.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "devDependencies": {
+    "lite-server": "^2.3.0",
+    "source-map-loader": "^0.2.1",
+    "ts-loader": "^2.2.0",
+    "typescript": "^2.3.4"
+  }
+}
