@@ -15,6 +15,7 @@
     "@fortawesome/fontawesome-free-solid": "^5.0.6",
     "@types/react": "^15.0.30",
     "@types/react-dom": "^15.5.0",
+    "bower": "^1.8.2",
     "normalize.css": "^7.0.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
