@@ -1,0 +1,71 @@
+@import fonts
+
+$sectionbgcolor: #003682;
+$navbgcolor: #004d91;
+$navbggreycolor : #313541;
+$bgactivenav: #003682;
+
+$activefontcolor: #fff;
+$fontcolor: #6a7583;
+
+$parentHeadings: .75em;
+
+.leftPanel
+    width: 360px;
+    position: absolute;
+    height: 100%;
+    background-color: #004d91;
+
+section
+    width: 100px;
+    height: 75px;
+    border-bottom: solid 1px darken($sectionbgcolor, 10%);
+    background-color: $sectionbgcolor;
+
+nav
+    width: 110px;
+    position: absolute;
+    height: 100%;
+    background-color: lighten($sectionbgcolor, 5%);
+    padding: 0;
+    margin: 0;
+    color: $fontcolor;
+    font-family: $fontFamily;
+    border-right: solid 1px #00265c;
+
+nav
+    h5
+        font-size: $parentHeadings;
+    ul
+        margin: 10 0 0;
+        padding: 0;
+        list-style: none;
+
+    li
+        display: inline-block;
+        margin: 0 0 20px 0
+        width: 100px;
+        text-align: center;
+        cursor: pointer;
+
+    a
+        display: block;
+        color: $activefontcolor;
+        padding: 20px 0;
+        text-decoration: none;
+        width: 109px;
+
+    a:hover
+        text-decoration: none;
+        color: $activefontcolor;
+
+    a:active
+        background-color: $bgactivenav
+        color: $activefontcolor
+        padding: 20px 0;
+    
+    .active
+        background-color: $bgactivenav
+        color: $activefontcolor
+        padding: 20px 0;
+

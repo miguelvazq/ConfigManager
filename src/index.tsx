@@ -1,10 +1,12 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { App } from './container/App';
-import './assets/styles.css';
-//import { Hello } from './components/Hello';
+import { Hello } from './components/Hello';
+import { Nav } from './components/Nav';
+import fontawesome from '@fortawesome/fontawesome'
+import solid from '@fortawesome/fontawesome-free-solid'
 
 ReactDOM.render(
-    <App title='Configuration Manager' framework='React' />,
+    <Nav />,
     document.getElementById('root')
 );

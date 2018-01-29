@@ -1,4 +1,11 @@
 module.exports = {
+
+    // const plugins = [
+    //     new webpack.ProvidePlugin({
+    //         identifier: ['react', 'react-dom'],
+    //     })
+    // ],
+
     entry: "./src/index.tsx",
     output: {
         filename: "bundle.js",
@@ -18,7 +25,19 @@ module.exports = {
             // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
             { test: /\.tsx?$/, loader: "ts-loader" },
             { test: /\.css$/, use: [ 'style-loader', 'css-loader' ] },
-
+            { test: /\.sass$/,
+                use: [{
+                    loader: "style-loader"
+                }, {
+                    loader: "css-loader", options: {
+                        sourceMap: true
+                    }
+                }, {
+                    loader: "sass-loader", options: {
+                        sourceMap: true
+                    }
+                }]
+            },
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
             { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
         ]
