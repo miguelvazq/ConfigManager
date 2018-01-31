@@ -7,8 +7,8 @@ import { SubLevelNav } from './SubLevelNav';
 export class Nav extends React.Component<any, any> {
     render() {
         return  <nav>
-                        <TopLevelNav />
-                        <SubLevelNav />
+                    <TopLevelNav />
+                    <SubLevelNav />
                 </nav>
     }
 }
