@@ -1,6 +1,5 @@
 import * as React from "react";
-import '../assets/sass/styles.sass';
-import 'bootstrap';
+import '../assets/sass/styles.sass'
 
 export interface AppProps { title: string; framework: string; }
 

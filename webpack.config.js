@@ -1,11 +1,5 @@
+var webpack = require('webpack');
 module.exports = {
-
-    // const plugins = [
-    //     new webpack.ProvidePlugin({
-    //         identifier: ['react', 'react-dom'],
-    //     })
-    // ],
-
     entry: "./src/index.tsx",
     output: {
         filename: "bundle.js",
@@ -42,6 +36,15 @@ module.exports = {
             { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
         ]
     },
+    plugins: [
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+            'window.jQuery': 'jquery',
+            Popper: ['popper.js', 'default'],
+
+        })
+    ],
 
     // When importing a module whose path matches one of the following, just
     // assume a corresponding global variable exists and use that instead.

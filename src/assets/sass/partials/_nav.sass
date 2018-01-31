@@ -1,13 +1,5 @@
-@import fonts
-
 $bgcolor: #004d91;
 $mainBlue: #003682; /*gets lightened*/
-
-.leftPanel
-    width: 360px;
-    position: absolute;
-    height: 100%;
-    background-color: $bgcolor;
 
 section
     width: 100px;
@@ -16,11 +8,12 @@ section
     background-color: $mainBlue;
 
 nav
-    width: 110px;
+    width: 360px;
     position: absolute;
+    display: table-row;
     height: 100%;
     background-color: lighten($mainBlue, 5%);
     padding: 0;
     margin: 0;
     font-family: $fontFamily;
-    border-right: solid 1px #00265c;
+    overflow: hidden;

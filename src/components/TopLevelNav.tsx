@@ -1,9 +1,7 @@
 import * as React from "react";
-import '../assets/sass/toplevelnav.sass';
-import axios from 'axios';
-
-const IP = "http://10.239.20.71:8020/ws_config2/getNode.json";
-
+import * as hpccComms from "@hpcc-js/comms";
+import * as util from "@hpcc-js/util";
+import '../assets/sass/styles.sass'
 export class TopLevelNav extends React.Component<any, any> {
     constructor(props:any) {
         super(props);
@@ -20,18 +18,18 @@ export class TopLevelNav extends React.Component<any, any> {
       }
 
     componentWillMount() {
-        axios.get(IP, {
-            params: {
-                nodeId: ".",
-                sessionId: "0"
-            }
-        }).then(res => {
+        var connection = new hpccComms.Connection({ baseUrl: "http://10.239.20.71:8020", type: "get" });
+        connection.send("ws_config2/getNode.json", {
+            nodeId: ".",
+            sessionId: "0"
+        }).then(response => {
             let defaultState = this.state.topLevelItems;
-            let currentState = res.data.GetNodeResponse.children.child;
+            let currentState = response.GetNodeResponse.children.child;
             this.setState({
                 topLevelItems: currentState
             });
         });
+
         // var topLevel:Array<string> = [];
 
         // axios.get(IP, {
@@ -59,11 +57,13 @@ export class TopLevelNav extends React.Component<any, any> {
     }
 
     render() {
-        return  <ul>
-            { this.state.topLevelItems.map((item:any, idx:number) => {
-                let isActive = (idx === 0) ? 'active' : '';
-                return <li key={item.nodeId}><a href={item.nodeId} className={isActive} onClick={() => this.handleClick(item.nodeId)}>{item.elementInfo.name}</a></li> })
-            }
-        </ul>
+        return  <div className="topLevelNav">
+            <ul>
+                { this.state.topLevelItems.map((item:any, idx:number) => {
+                    let isActive = (idx === 0) ? 'active' : '';
+                    return <li key={item.nodeId}><a href={item.nodeId} className={isActive} onClick={() => this.handleClick(item.nodeId)}>{item.elementInfo.name}</a></li> })
+                }
+            </ul>
+        </div>
     }
 }
