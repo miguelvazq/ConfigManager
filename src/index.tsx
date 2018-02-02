@@ -5,7 +5,6 @@ import * as ReactDOM from 'react-dom';
 import { Nav } from './components/Nav';
 import 'bootstrap';
 
-
 //import 'bootstrap/dist/css/bootstrap.css';
 // import fontawesome from '@fortawesome/fontawesome'
 // import solid from '@fortawesome/fontawesome-free-solid'

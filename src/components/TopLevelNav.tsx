@@ -2,6 +2,7 @@ import * as React from "react";
 import * as hpccComms from "@hpcc-js/comms";
 import * as util from "@hpcc-js/util";
 import '../assets/sass/styles.sass'
+
 export class TopLevelNav extends React.Component<any, any> {
     constructor(props:any) {
         super(props);
@@ -29,31 +30,6 @@ export class TopLevelNav extends React.Component<any, any> {
                 topLevelItems: currentState
             });
         });
-
-        // var topLevel:Array<string> = [];
-
-        // axios.get(IP, {
-        //     params: {
-        //         nodeId: ".",
-        //         sessionId: "0"
-        //     }
-        // })
-        // .then(function (response) {
-        //     let parentComponent = response.data.GetNodeResponse.children.child;
-            
-        //     parentComponent.map((item:any, idx:number) => {
-        //         if (item.elementInfo.name === "Hardware" || item.elementInfo.name == "Software") {
-        //             topLevel.push(item.elementInfo.name)
-        //         }
-        //     });
-        // }).catch(function (error) {
-        //     console.log(error);
-        // });
-
-        // this.setState({
-        //     topLevelItems: ["hi", "hello"]
-        // });
-
     }
 
     render() {
