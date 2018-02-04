@@ -1,15 +1,15 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-// import { App } from './container/App';
-// import { Hello } from './components/Hello';
-import { Nav } from './components/Nav';
+import { App } from './container/App';
+import './assets/sass/styles.sass';
 import 'bootstrap';
 
-//import 'bootstrap/dist/css/bootstrap.css';
-// import fontawesome from '@fortawesome/fontawesome'
-// import solid from '@fortawesome/fontawesome-free-solid'
-
+export class Index extends React.Component<any, any>{
+    render() {
+        return <App />
+    }
+}
 ReactDOM.render(
-    <Nav />,
+    <App />,
     document.getElementById('root')
 );

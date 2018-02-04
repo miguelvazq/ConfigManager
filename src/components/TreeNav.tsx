@@ -1,48 +1,34 @@
 import * as React from 'react';
-import { Tree } from 'antd';
-import { Menu, Icon } from 'antd';
+import { Menu } from 'antd';
 const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
 
-export class TreeNav extends React.Component {
+export class TreeNav extends React.Component<any, any> {
   handleClick = (e:any) => {
+    //console.log('click ', e);
+  }
+  handleParentClick = (e:any) => {
+    //console.log('click ', e);
+    this.props.callbackFromParent(e.key);
+  }
+  handleOpenChange = (e:any) => {
     console.log('click ', e);
+    //this.props.callbackFromParent(e.key);
   }
   render() {
     return (
-      <Menu
-        onClick={this.handleClick}
-        style={{ width: 256 }}
-        defaultSelectedKeys={['1']}
-        defaultOpenKeys={['sub1']}
-        mode="inline"
-      >
-        <SubMenu key="sub1" title={<span><Icon type="mail" /><span>Navigation One</span></span>}>
-          
-            <Menu.Item key="1">Option 1</Menu.Item>
-            <Menu.Item key="2">Option 2</Menu.Item>
-          
-          
-            <Menu.Item key="3">Option 3</Menu.Item>
-            <Menu.Item key="4">Option 4</Menu.Item>
-          
-        </SubMenu>
-        <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>Navigation Two</span></span>}>
-          <Menu.Item key="5">Option 5</Menu.Item>
-          <Menu.Item key="6">Option 6</Menu.Item>
-          <SubMenu key="sub3" title="Submenu">
-            <Menu.Item key="7">Option 7</Menu.Item>
-            <Menu.Item key="8">Option 8</Menu.Item>
-          </SubMenu>
-        </SubMenu>
-        <SubMenu key="sub4" title={<span><Icon type="setting" /><span>Navigation Three</span></span>}>
-          <Menu.Item key="9">Option 9</Menu.Item>
-          <Menu.Item key="10">Option 10</Menu.Item>
-          <Menu.Item key="11">Option 11</Menu.Item>
-          <Menu.Item key="12">Option 12</Menu.Item>
-        </SubMenu>
+        <Menu
+            onClick={this.handleClick}
+            style={{ width: 250 }}
+            mode="inline"
+            onOpenChange={this.handleOpenChange}
+        >
+        {this.props.topLevelTreeData.map((item:any, idx:number) => {
+          return item.numChildren > 0 ?
+          <SubMenu onTitleClick={this.handleParentClick} key={item.nodeId} title={<span><span>{item.elementInfo.name}</span></span>}>
+            {this.props.subLevelData.map((member:any, idx:number) =>{ return <Menu.Item key={member.nodeId}>{member.elementInfo.name}</Menu.Item>})}
+          </SubMenu> : <Menu.Item key={item.nodeId+idx}>{item.elementInfo.name}</Menu.Item>
+        })}
       </Menu>
     );
   }
 }
-
