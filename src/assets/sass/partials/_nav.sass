@@ -1,20 +1,59 @@
 $bgcolor: #004d91;
 $mainBlue: #003682; /*gets lightened*/
+$white: #fff;
 
 section
-    width: 100px;
-    height: 75px;
+    width: 249px;
+    height: 65px;
     border-bottom: solid 1px darken($mainBlue, 10%);
+    background-color: $bgcolor;
+    padding: 10px 0 0 20px;
+
+    .logoContainer
+        width: 40px;
+        height: 35px;
+        background: $bgcolor;
+        color: $white;
+        padding: 5px;
+        text-align: center;
+.logo
     background-color: $mainBlue;
+    
+.configuring
+    background-color: $bgcolor;
 
 nav
-    width: 249px;
+    width: 275px;
     position: absolute;
     display: table-row;
     overflow: auto;
     height: 100%;
-    background-color: #004d91; //lighten($mainBlue, 5%);
+    background-color: $bgcolor; //lighten($mainBlue, 5%);
     padding: 0;
     margin: 0;
     font-family: $fontFamily;
     overflow-x: hidden;
+    color: $white;
+
+    .ant-menu
+        font-size: 14px;
+        line-height: 1.5;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        outline: none;
+        margin-bottom: 0;
+        padding-left: 0;
+        list-style: none;
+        -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        color: $white;
+        background: $bgcolor;
+        line-height: 0;
+        -webkit-transition: background .3s, width .2s;
+        transition: background .3s, width .2s;
+        zoom: 1;
+
+    .ant-menu-submenu > .ant-menu
+        background-color: $bgcolor;

@@ -2,6 +2,7 @@ import * as React from "react";
 import { TreeNav } from './TreeNav';
 import * as hpccComms from "@hpcc-js/comms";
 import * as util from "@hpcc-js/util";
+import { open } from "fs";
 
 export class Nav extends React.Component<any, any> {
     constructor(props:any) {
@@ -23,6 +24,11 @@ export class Nav extends React.Component<any, any> {
             nodeId: ".",
             sessionId: "0"
         }).then(response => {
+            response.GetNodeResponse.children.child.forEach((item:any, idx:number) => {
+                if (response.GetNodeResponse.children.child[idx].elementInfo.name === "Software") {
+                    this.getSubLevelComponents(item.nodeId);    
+                }    
+            })
             let defaultState = this.state.topLevelData;
             let currentState = response.GetNodeResponse.children.child;
             this.setState({
@@ -47,7 +53,9 @@ export class Nav extends React.Component<any, any> {
 
     render() {
         return  <nav>
-                <TreeNav topLevelTreeData={this.state.topLevelData} subLevelData={this.state.subLevelData} callbackFromParent={this.myCallback} />
-            </nav>
+                    <section className="logo"><div className="logoContainer">CM</div><span className="strong">Configuration Manager</span></section>
+                    <section className="configuring"><span>Currently editing: </span><p className="strong">environment.xml</p></section>
+                    <TreeNav topLevelTreeData={this.state.topLevelData} subLevelData={this.state.subLevelData} callbackFromParent={this.myCallback} />
+                </nav>
     }
 }

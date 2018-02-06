@@ -10,7 +10,7 @@ export class App extends React.Component<any, any>{
     }
 
     render() {
-        return <Entry />//<Nav />
+        return <Nav />//<Entry />
     }
     
 }

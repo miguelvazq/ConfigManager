@@ -17,22 +17,13 @@ module.exports = {
     module: {
         rules: [
             // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
-            {
-                test: /\.js$/,
-                exclude: /(node_modules|bower_components)/,
-                use: {
-                  loader: 'babel-loader',
-                  options: {
-                    presets: ['@babel/preset-env']
-                  }
-                }
-            },
             { test: /\.tsx?$/, loader: "ts-loader" },
-            { test: /\.(png|svg|jpg|gif)$/,
-                use: [
-                    'file-loader'
-                ]
-            },
+            { test: /\.(png|jpg|gif)$/,
+                use: [{
+                    loader: 'file-loader',
+                    options: {}  
+                  }]
+              },
             { test: /\.css$/, use: [ 'style-loader', 'css-loader' ] },
             { test: /\.sass$/,
                 use: [{

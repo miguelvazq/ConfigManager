@@ -18,12 +18,14 @@ export class TreeNav extends React.Component<any, any> {
     return (
         <Menu
             onClick={this.handleClick}
-            style={{ width: 250 }}
+            style={{ width: 276 }}
             mode="inline"
             onOpenChange={this.handleOpenChange}
+            defaultOpenKeys={['5']}
         >
+
         {this.props.topLevelTreeData.map((item:any, idx:number) => {
-          return item.numChildren > 0 ?
+          return item.numChildren > 0  ? //&& !item. to hide elements that are not required
           <SubMenu onTitleClick={this.handleParentClick} key={item.nodeId} title={<span><span>{item.elementInfo.name}</span></span>}>
             {this.props.subLevelData.map((member:any, idx:number) =>{ return <Menu.Item key={member.nodeId}>{member.elementInfo.name}</Menu.Item>})}
           </SubMenu> : <Menu.Item key={item.nodeId+idx}>{item.elementInfo.name}</Menu.Item>

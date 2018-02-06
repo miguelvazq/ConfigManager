@@ -2,6 +2,7 @@ import * as React from "react";
 import { Select } from 'antd';
 import * as hpccComms from "@hpcc-js/comms";
 import * as util from "@hpcc-js/util";
+import '../hpcc-logo.png';
 
 const Option = Select.Option;
 
@@ -37,7 +38,7 @@ export class Entry extends React.Component<any, any> {
         return  <div className="entryDiv">
             <div className="selectConfiguration">
             <div>
-                <img src="hpcc-logo.png" alt="HPCC Logo" />
+                {/* <img src={require("./hpcc-logo.png")} alt="HPCC Logo" /> */}
                 <label>Pick a configuration file: </label>
                 <Select defaultValue="" style={{ width: 300 }} onChange={this.handleChange}>
                     <Option value="environtment.xml">environtment.xml</Option>
