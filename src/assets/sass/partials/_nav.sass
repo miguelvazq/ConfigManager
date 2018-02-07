@@ -3,7 +3,7 @@ $mainBlue: #003682; /*gets lightened*/
 $white: #fff;
 
 section
-    width: 249px;
+    width: 275px;
     height: 65px;
     border-bottom: solid 1px darken($mainBlue, 10%);
     background-color: $bgcolor;
@@ -11,14 +11,17 @@ section
 
     .logoContainer
         width: 40px;
-        height: 35px;
+        height: 20px;
         background: $bgcolor;
         color: $white;
-        padding: 5px;
+        padding: 15px;
         text-align: center;
+        display: inline-table;
+        margin-right: 8px;
+
 .logo
     background-color: $mainBlue;
-    
+
 .configuring
     background-color: $bgcolor;
 
@@ -32,7 +35,7 @@ nav
     padding: 0;
     margin: 0;
     font-family: $fontFamily;
-    overflow-x: hidden;
+    // overflow-x: hidden;
     color: $white;
 
     .ant-menu
@@ -54,6 +57,11 @@ nav
         -webkit-transition: background .3s, width .2s;
         transition: background .3s, width .2s;
         zoom: 1;
+        font-family: $fontFamily
 
     .ant-menu-submenu > .ant-menu
         background-color: $bgcolor;
+
+    .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected
+        background-color: #003682;
+

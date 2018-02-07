@@ -21,9 +21,9 @@ module.exports = {
             { test: /\.(png|jpg|gif)$/,
                 use: [{
                     loader: 'file-loader',
-                    options: {}  
-                  }]
-              },
+                    options: {}
+                }]
+            },
             { test: /\.css$/, use: [ 'style-loader', 'css-loader' ] },
             { test: /\.sass$/,
                 use: [{

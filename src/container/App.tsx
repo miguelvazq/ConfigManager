@@ -1,7 +1,8 @@
 import * as React from "react";
 import '../assets/sass/styles.sass';
-import { Nav } from '../components/Nav';
+import { Nav } from './Nav';
 import { Entry } from '../components/Entry';
+import { Content } from './Content';
 
 export class App extends React.Component<any, any>{
 
@@ -10,7 +11,11 @@ export class App extends React.Component<any, any>{
     }
 
     render() {
-        return <Nav />//<Entry />
+        return (
+        <div>
+            <Nav />
+            <Content />
+        </div>
+        )
     }
-    
 }

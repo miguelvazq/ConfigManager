@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TreeNav } from './TreeNav';
+import { TreeNav } from '../components/TreeNav';
 import * as hpccComms from "@hpcc-js/comms";
 import * as util from "@hpcc-js/util";
 import { open } from "fs";
@@ -11,14 +11,9 @@ export class Nav extends React.Component<any, any> {
             topLevelData: [],
             subLevelData: []
         }
-        this.getTopLevelComponents();
     };
 
-    myCallback = (dataFromClick:number, open:boolean) => {
-        this.getSubLevelComponents(dataFromClick)
-    }
-
-    getTopLevelComponents(){
+    componentDidMount() {
         var connection = new hpccComms.Connection({ baseUrl: "http://10.239.20.71:8020", type: "get" });
         connection.send("ws_config2/getNode.json", {
             nodeId: ".",
@@ -26,8 +21,8 @@ export class Nav extends React.Component<any, any> {
         }).then(response => {
             response.GetNodeResponse.children.child.forEach((item:any, idx:number) => {
                 if (response.GetNodeResponse.children.child[idx].elementInfo.name === "Software") {
-                    this.getSubLevelComponents(item.nodeId);    
-                }    
+                    this.getSubLevelComponents(item.nodeId);
+                }
             })
             let defaultState = this.state.topLevelData;
             let currentState = response.GetNodeResponse.children.child;
@@ -36,6 +31,29 @@ export class Nav extends React.Component<any, any> {
             });
         });
     }
+
+    myCallback = (dataFromClick:number, open:boolean) => {
+        this.getSubLevelComponents(dataFromClick)
+    }
+
+    // getTopLevelComponents(){
+    //     var connection = new hpccComms.Connection({ baseUrl: "http://10.239.20.71:8020", type: "get" });
+    //     connection.send("ws_config2/getNode.json", {
+    //         nodeId: ".",
+    //         sessionId: "0"
+    //     }).then(response => {
+    //         response.GetNodeResponse.children.child.forEach((item:any, idx:number) => {
+    //             if (response.GetNodeResponse.children.child[idx].elementInfo.name === "Software") {
+    //                 this.getSubLevelComponents(item.nodeId);
+    //             }
+    //         })
+    //         let defaultState = this.state.topLevelData;
+    //         let currentState = response.GetNodeResponse.children.child;
+    //         this.setState({
+    //             topLevelData: currentState,
+    //         });
+    //     });
+    // }
 
     getSubLevelComponents(nodeId:number){
         var connection = new hpccComms.Connection({ baseUrl: "http://10.239.20.71:8020", type: "get" });

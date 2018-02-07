@@ -4,26 +4,26 @@ const SubMenu = Menu.SubMenu;
 
 export class TreeNav extends React.Component<any, any> {
   handleClick = (e:any) => {
-    //console.log('click ', e);
-  }
-  handleParentClick = (e:any) => {
-    //console.log('click ', e);
+    console.log('click ', e);
     this.props.callbackFromParent(e.key);
   }
-  handleOpenChange = (e:any) => {
+  handleParentClick = (e:any) => {
     console.log('click ', e);
-    //this.props.callbackFromParent(e.key);
+    this.props.callbackFromParent(e.key);
   }
+  // handleOpenChange = (e:any) => {
+  //   console.log('click ', e);
+  //   //this.props.callbackFromParent(e.key);
+  // }
   render() {
     return (
         <Menu
             onClick={this.handleClick}
             style={{ width: 276 }}
             mode="inline"
-            onOpenChange={this.handleOpenChange}
+            //onOpenChange={this.handleOpenChange}
             defaultOpenKeys={['5']}
         >
-
         {this.props.topLevelTreeData.map((item:any, idx:number) => {
           return item.numChildren > 0  ? //&& !item. to hide elements that are not required
           <SubMenu onTitleClick={this.handleParentClick} key={item.nodeId} title={<span><span>{item.elementInfo.name}</span></span>}>
