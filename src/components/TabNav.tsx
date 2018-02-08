@@ -1,14 +1,11 @@
 import * as React from 'react';
 import { Tabs } from 'antd';
+import * as hpccComms from "@hpcc-js/comms";
+import * as util from "@hpcc-js/util";
 const TabPane = Tabs.TabPane;
 
 export class TabNav extends React.Component<any, any> {
-  constructor(props:any) {
-    super(props);
-    this.state = {
-      tabData: []
-    }
-  };
+
   render() {
     return <Tabs type="card">
       <TabPane tab="Tab 1" key="1">Content of Tab Pane 1</TabPane>
