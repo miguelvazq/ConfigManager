@@ -14,7 +14,7 @@ export class App extends React.Component<any, any>{
         return (
         <div>
             <Nav />
-            {/* ///<Content /> */}
+            <Content />
         </div>
         )
     }

@@ -22,11 +22,11 @@ export class TreeNav extends React.Component<any, any> {
             style={{ width: 276 }}
             mode="inline"
             //onOpenChange={this.handleOpenChange}
-            defaultOpenKeys={['5']}
+            defaultOpenKeys={['6']}
         >
         {this.props.topLevelTreeData.map((item:any, idx:number) => {
           return item.numChildren > 0  ? //&& !item. to hide elements that are not required
-          <SubMenu onTitleClick={this.subMenuClick} key={item.nodeId} title={<span><span>{item.nodeInfo.name}</span></span>}>
+          <SubMenu /*onTitleClick={this.subMenuClick}*/ key={item.nodeId} title={<span><span>{item.nodeInfo.name}</span></span>}>
             {this.props.subLevelData.map((member:any, idx:number) => { return <Menu.Item key={member.nodeId}>{member.nodeInfo.name}</Menu.Item>})}
           </SubMenu> : <Menu.Item key={item.nodeId+idx}>{item.nodeInfo.name}</Menu.Item>
         })}

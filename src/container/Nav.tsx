@@ -11,14 +11,15 @@ export class Nav extends React.Component<any, any> {
         this.state = {
             topLevelData: [],
             subLevelData: [],
-            tabData: []
+            tabData: [],
+            showContent: false
         }
     };
 
     componentDidMount() {
         var connection = new hpccComms.Connection({ baseUrl: "http://10.239.20.71:8020", type: "get" });
         connection.send("ws_config2/getNode.json", {
-            nodeId: ".",
+            nodeId: "0",
             sessionId: "0"
         }).then(response => {
             response.GetNodeResponse.children.child.forEach((item:any, idx:number) => {
@@ -35,9 +36,10 @@ export class Nav extends React.Component<any, any> {
         });
     }
 
-    subMenuCallback = (dataFromClick:number, open:boolean) => {
-        this.getSubLevelComponents(dataFromClick)
-        this.getTabComponents(dataFromClick)
+    subMenuCallback = (dataFromClick:number, open:boolean) => { //only for children of submenu click to affect tabs
+        //this.getSubLevelComponents(dataFromClick)
+        this.getTabComponents(dataFromClick);
+        this.setState({showContent: true});
     }
 
     // tabMenuCallback = (dataFromClick:number) => {
@@ -66,11 +68,7 @@ export class Nav extends React.Component<any, any> {
             nodeId: nodeId,
             sessionId: "0"
         }).then(response => {
-            let defaultState = this.state.subLevelData;
-            let currentState = response.GetNodeResponse.children.child;
-            this.setState({
-                subLevelData: currentState
-            });
+           this.setState({tabData: response.GetNodeResponse.children.child})
         });
     }
 
@@ -79,7 +77,10 @@ export class Nav extends React.Component<any, any> {
                     <section className="logo"><div className="logoContainer">CM</div><span className="strong">Configuration Manager</span></section>
                     <section className="configuring"><span>Currently editing: </span><p className="strong">environment.xml</p></section>
                     <TreeNav topLevelTreeData={this.state.topLevelData} subLevelData={this.state.subLevelData} callbackFromSubMenu={this.subMenuCallback} />
-                    <TabNav tabData={this.state.tabData} callbackFromTabMenu={this.tabMenuCallback} />
+                    {this.state.showContent  ?
+                        <TabNav tabData={this.state.tabData} /> :
+                        null
+                    }
                 </nav>
     }
 }
