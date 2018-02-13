@@ -7,30 +7,30 @@ export class Content extends React.Component<any, any> {
     constructor(props:any) {
         super(props);
         this.state = {
-            tabData: []
+            currentState: null
         }
-    };
+        console.log(this.props.data)
+    }
 
-    myCallback = (dataFromClick:number, open:boolean) => {
-        this.getTabCompoents(dataFromClick)
+    componentDidMount() {
+        this.getTabCompoents(this.props.childID);
     }
 
     getTabCompoents(nodeId:number){
         var connection = new hpccComms.Connection({ baseUrl: "http://10.239.20.71:8020", type: "get" });
         connection.send("ws_config2/getNode.json", {
-            nodeId: nodeId,
+            nodeId: this.props.data,
             sessionId: "0"
         }).then(response => {
-            let defaultState = this.state.subLevelData;
-            let currentState = response.GetNodeResponse.children.child;
             this.setState({
-                subLevelData: currentState
+                currentState: response.GetNodeResponse.nodeInfo
             });
         });
     }
 
     render() {
-        return  <TabNav tabData={this.state.tabData} callbackFromParent={this.myCallback} />
+        return {this.state.childID !== "" ? <TabNav tabData={this.state.currentState} /> : null }
+        
     }
 
 

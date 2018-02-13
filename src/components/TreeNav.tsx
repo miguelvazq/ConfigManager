@@ -7,9 +7,9 @@ export class TreeNav extends React.Component<any, any> {
   //   console.log('click ', e);
   //   this.props.callbackFromParent(e.key);
   // }
-  subMenuClick = (e:any) => {
+  clickHandler = (e:any) => {
     console.log('click ', e);
-    this.props.callbackFromSubMenu(e.key);
+    this.props.changeHandler(e.key);
   }
   // handleOpenChange = (e:any) => {
   //   console.log('click ', e);
@@ -18,7 +18,7 @@ export class TreeNav extends React.Component<any, any> {
   render() {
     return (
         <Menu
-            onClick={this.subMenuClick}
+            onClick={this.clickHandler}
             style={{ width: 276 }}
             mode="inline"
             //onOpenChange={this.handleOpenChange}

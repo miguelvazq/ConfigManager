@@ -9,10 +9,15 @@ export class TabNav extends React.Component<any, any> {
     super(props);
   }
 
+  changeHandler(e:any) {
+    this.props.onClick(e.key);
+  }
+
   render() {
+    console.log(this.props.tabData)
     return <Tabs type="card">
-      {this.props.tabData.map((item:any, idx:number) => {
-        <TabPane tab={item.nodeInfo.name} key={item.nodeId}>Generate Controls here:</TabPane>
+     {this.props.tabData.map((item:any, idx:number) => {
+       <TabPane tab="Tab 1" key="1">Content of Tab Pane 1</TabPane>
       })}
   </Tabs>
   }

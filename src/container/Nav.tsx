@@ -38,8 +38,9 @@ export class Nav extends React.Component<any, any> {
 
     subMenuCallback = (dataFromClick:number, open:boolean) => { //only for children of submenu click to affect tabs
         //this.getSubLevelComponents(dataFromClick)
-        this.getTabComponents(dataFromClick);
-        this.setState({showContent: true});
+        // this.getTabComponents(dataFromClick);
+        // this.setState({showContent: true});
+        this.props.onClick(dataFromClick);
     }
 
     // tabMenuCallback = (dataFromClick:number) => {
@@ -76,11 +77,11 @@ export class Nav extends React.Component<any, any> {
         return  <nav>
                     <section className="logo"><div className="logoContainer">CM</div><span className="strong">Configuration Manager</span></section>
                     <section className="configuring"><span>Currently editing: </span><p className="strong">environment.xml</p></section>
-                    <TreeNav topLevelTreeData={this.state.topLevelData} subLevelData={this.state.subLevelData} callbackFromSubMenu={this.subMenuCallback} />
-                    {this.state.showContent  ?
+                    <TreeNav topLevelTreeData={this.state.topLevelData} subLevelData={this.state.subLevelData} changeHandler={this.subMenuCallback} />
+                    {/* {this.state.showContent  ?
                         <TabNav tabData={this.state.tabData} /> :
                         null
-                    }
+                    } */}
                 </nav>
     }
 }
