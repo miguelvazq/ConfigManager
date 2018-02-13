@@ -12,7 +12,6 @@ export class App extends React.Component<any, any>{
             childID: ""
         }
         this.changeHandler = this.changeHandler.bind(this)
-        
     }
 
     changeHandler(value:any) {

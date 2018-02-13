@@ -14,10 +14,10 @@ export class TabNav extends React.Component<any, any> {
   }
 
   render() {
-    console.log(this.props.tabData)
+    console.log(this.props)
     return <Tabs type="card">
      {this.props.tabData.map((item:any, idx:number) => {
-       <TabPane tab="Tab 1" key="1">Content of Tab Pane 1</TabPane>
+       return <TabPane tab={item.nodeInfo.name} key={idx}>Content of Tab Pane {idx}</TabPane>
       })}
   </Tabs>
   }

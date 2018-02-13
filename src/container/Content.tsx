@@ -7,29 +7,35 @@ export class Content extends React.Component<any, any> {
     constructor(props:any) {
         super(props);
         this.state = {
-            currentState: null
+            currentState: ""
         }
-        console.log(this.props.data)
     }
 
-    componentDidMount() {
-        this.getTabCompoents(this.props.childID);
+    componentWillReceiveProps(nextProps) {
+        if (this.props.data !== nextProps){
+            this.getTabComponents(nextProps.data);
+        }
+        this.getTabComponents(nextProps.data);
     }
 
-    getTabCompoents(nodeId:number){
+    getTabComponents(nodeId:number){
         var connection = new hpccComms.Connection({ baseUrl: "http://10.239.20.71:8020", type: "get" });
         connection.send("ws_config2/getNode.json", {
-            nodeId: this.props.data,
+            nodeId: nodeId,
             sessionId: "0"
         }).then(response => {
             this.setState({
-                currentState: response.GetNodeResponse.nodeInfo
+                currentState: response.GetNodeResponse.children.child
             });
         });
     }
 
     render() {
-        return {this.state.childID !== "" ? <TabNav tabData={this.state.currentState} /> : null }
+        return (
+            <div>
+                {this.state.currentState.length !== 0 ? <TabNav tabData={this.state.currentState} /> : null}
+            </div>
+        )
         
     }
 
