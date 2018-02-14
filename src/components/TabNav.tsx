@@ -17,7 +17,7 @@ export class TabNav extends React.Component<any, any> {
     console.log(this.props)
     return <Tabs type="card">
      {this.props.tabData.map((item:any, idx:number) => {
-       return <TabPane tab={item.nodeInfo.name} key={idx}>Content of Tab Pane {idx}</TabPane>
+       return <TabPane tab={item.attributes.attribute.name} key={idx}>Content of Tab Pane {idx}</TabPane>
       })}
   </Tabs>
   }

@@ -25,7 +25,7 @@ export class Content extends React.Component<any, any> {
             sessionId: "0"
         }).then(response => {
             this.setState({
-                currentState: response.GetNodeResponse.children.child
+                currentState: response.GetNodeResponse.attributes.attribute
             });
         });
     }

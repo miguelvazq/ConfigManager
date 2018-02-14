@@ -16,21 +16,18 @@ export class TreeNav extends React.Component<any, any> {
   //   //this.props.callbackFromParent(e.key);
   // }
   render() {
-    return (
-        <Menu
-            onClick={this.clickHandler}
-            style={{ width: 276 }}
-            mode="inline"
-            //onOpenChange={this.handleOpenChange}
-            defaultOpenKeys={['6']}
-        >
+    return ( 
+      <div>
         {this.props.topLevelTreeData.map((item:any, idx:number) => {
-          return item.children ? //&& !item. to hide elements that are not required
-          <SubMenu /*onTitleClick={this.subMenuClick}*/ key={item.nodeId} title={<span><span>{item.nodeInfo.name}</span></span>}>
-            {item.children.node.map((member:any, idx:number) => { return <Menu.Item key={member.nodeId}>{member.nodeInfo.name}</Menu.Item>})}
-          </SubMenu> : <Menu.Item key={item.nodeId+idx}>{item.nodeInfo.name}</Menu.Item>
+          return !item.nodeInfo.isHidden ? <h5 key={item.nodeId}>{item.nodeInfo.name}</h5> : ""
         })}
-      </Menu>
+        {this.props.topLevelTreeData.map((menuItem:any, idx:number) =>{
+          <SubMenu /*onTitleClick={this.subMenuClick}*/ key={menuItem.nodeId} title={<span><span>{menuItem.nodeInfo.name}</span></span>}>
+            {/* {menuItem.children.node.map((member:any, idx:number) => { return <Menu.Item key={member.nodeId}>{member.nodeInfo.name}</Menu.Item>})} */}
+          </SubMenu>
+        })}
+      </div>
     );
+    
   }
 }
