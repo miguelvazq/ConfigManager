@@ -1,11 +1,12 @@
-import React from 'react'
+import React from 'react';
+import { Button } from 'semantic-ui-react';
 
-class Button extends React.Component {
+class ButtonControl extends React.Component {
     render() {
         return (
-            <button className={this.props.class} type={this.props.type}> {this.props.value} </button>
+            <Button>Click Here</Button>
         )
     }
 }
 
-export default Button
+export default ButtonControl;
