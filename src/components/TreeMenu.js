@@ -1,7 +1,8 @@
 import React from 'react';
 import {Treebeard} from 'react-treebeard';
+import style from './styles/treeMenuStyles';
 
-class CollapsibleMenu extends React.Component {
+class TreeMenu extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -15,9 +16,14 @@ class CollapsibleMenu extends React.Component {
         node.active = true;
         if(node.children) { 
             node.toggled = toggled;
+        } else {
+            this.onHandleClick(node.id);
         }
-
         this.setState({ cursor: node });
+    }
+
+    onHandleClick(nodeId) {
+        this.props.changeHandler(nodeId);
     }
 
     render() {
@@ -25,8 +31,10 @@ class CollapsibleMenu extends React.Component {
         <Treebeard
             data={this.props.data}
             onToggle={this.onToggle}
+            style={style}
+            onClick={this.onHandleClick}
         />
         );
     }
 }
-export default CollapsibleMenu;
+export default TreeMenu;

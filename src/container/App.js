@@ -5,7 +5,7 @@ import Content from "../components/Content";
 export class App extends React.Component{
     render() {
             return (
-                <div style="border:solid 1px #000;">
+                <div className="container">
                     <Navigation />
                     <Content />
                 </div>

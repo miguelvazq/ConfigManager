@@ -8,7 +8,7 @@ class Content extends React.Component {
     }
 
     render() {
-        return <h1>hello</h1>
+        return <div className="content"><h1>hello</h1></div>
     }
 
 }
