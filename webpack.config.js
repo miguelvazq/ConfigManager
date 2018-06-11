@@ -8,6 +8,7 @@ const htmlWebpackPlugin = new HtmlWebPackPlugin({
 module.exports = {
     entry: ["babel-polyfill", "./src/index.js"],
     mode: "development",
+    devtool: "source-map",
     module: {
         rules: [
             {

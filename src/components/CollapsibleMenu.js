@@ -1,37 +1,6 @@
 import React from 'react';
 import {Treebeard} from 'react-treebeard';
 
-// const data = {
-//     name: 'root',
-//     children: [
-//         {
-//             name: 'Hardware',
-//             children: [
-//                 { name: 'child1' },
-//                 { name: 'child2' }
-//             ]
-//         },
-//         // {
-//         //     name: 'loading parent',
-//         //     loading: true,
-//         //     children: []
-//         // },
-//         {
-//             name: 'Software',
-//             children: [
-//                 {
-//                     name: 'nested parent',
-//                     children: [
-//                         { name: 'nested child 1' },
-//                         { name: 'nested child 2' }
-//                     ]
-//                 }
-//             ]
-//         }
-//     ]
-// }
-
-
 class CollapsibleMenu extends React.Component {
     constructor(props) {
         super(props);
@@ -49,7 +18,7 @@ class CollapsibleMenu extends React.Component {
         }
 
         this.setState({ cursor: node });
-}
+    }
 
     render() {
         return (
@@ -60,5 +29,4 @@ class CollapsibleMenu extends React.Component {
         );
     }
 }
-
 export default CollapsibleMenu;

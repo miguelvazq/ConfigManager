@@ -6,10 +6,10 @@ import CollapsibleMenu from './CollapsibleMenu';
 
 class Navigation extends React.Component {
     constructor(props) {
+        super(props);
         var data = {};
         const IP = "http://10.239.20.71:8020/ws_config2/GetNodeTree.json"
 
-        super(props);
         this.state = {
             data: {},
             name: "root"
@@ -17,8 +17,8 @@ class Navigation extends React.Component {
 
         axios.get(IP,{
             params: {
-                NodeId: "1041",
-                SessionId: "4",
+                NodeId: "521",
+                SessionId: "2",
                 IncludeAttributes: true,
                 NumLevels: 2
             }
@@ -31,10 +31,12 @@ class Navigation extends React.Component {
                     name: node.NodeInfo.Name
                 });
                 data["children"] = children;
+
                 node.Children.Node.forEach(child => {
+                    console.log(child)
                     subChildren.push({
                         name: child.NodeInfo.Name
-                    })
+                    });
                     data.children[idx]["children"] = subChildren;
                 });
              });
