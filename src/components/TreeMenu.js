@@ -23,7 +23,7 @@ class TreeMenu extends React.Component {
     }
 
     onHandleClick(nodeId) {
-        this.props.changeHandler(nodeId);
+        this.props.onClick(nodeId);
     }
 
     render() {

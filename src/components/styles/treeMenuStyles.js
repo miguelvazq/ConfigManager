@@ -9,7 +9,7 @@ export default {
             padding: 0,
             color: '$white',
             fontFamily: '$fontFamily',
-            fontSize: '14px'
+            fontSize: '14px',
         },
         node: {
             base: {
@@ -23,7 +23,7 @@ export default {
                 display: 'block'
             },
             activeLink: {
-                background: '#0077CC'
+                background: '#1478a8'
             },
             toggle: {
                 base: {
