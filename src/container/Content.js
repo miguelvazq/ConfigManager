@@ -1,24 +1,30 @@
 import React from 'react';
 import axios from 'axios';
 import TabNavigation from '../components/Tab';
+import ComponentSet from '../components/ComponentSet';
+
 const URL = "http://10.239.20.71:8020/ws_config2/GetNode.json"
+
 class Content extends React.Component {
     constructor(props) {
-        
         super(props);
-        
         this.state = {
             currentState: []
         }
-        console.log(this.props.data);
-        //this.getTabCompoents(this.props.data);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.data !== nextProps.data){
+            this.getTabComponents(nextProps.data);
+        }
+        this.getTabComponents(nextProps.data);
     }
 
     componentDidMount() {
-        this.getTabCompoents(this.props.data);
+        this.getTabComponents(this.props.data);
     }
 
-    getTabCompoents(nodeId){
+    getTabComponents(nodeId){
         axios.get(URL, {
             params: {
                 NodeId: nodeId,
@@ -27,7 +33,6 @@ class Content extends React.Component {
         }).then(res => {
             var data = [];
             res.data.GetNodeResponse.Children.Child.map((node, idx) => {
-                console.log(node);
                 data.push({
                     menuItem: node.NodeInfo.Name,
                     pane: node.NodeInfo.Name,

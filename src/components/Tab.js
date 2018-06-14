@@ -1,9 +1,10 @@
 import React from 'react';
-import { Tab } from 'semantic-ui-react'
+import { Tab } from 'semantic-ui-react';
 
 class TabNavigation extends React.Component {
     constructor(props) {
         super(props);
+        console.log(props)
     }
 
     render() {

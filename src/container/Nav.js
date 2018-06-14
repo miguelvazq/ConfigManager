@@ -3,11 +3,12 @@ import axios from 'axios';
 import DropdownControl from '../components/DropdownControl';
 import TreeMenu from '../components/TreeMenu';
 
+const URL = "http://10.239.20.71:8020/ws_config2/GetNodeTree.json"
+
 class Navigation extends React.Component {
     constructor(props) {
         super(props);
-        var data = {};
-        const URL = "http://10.239.20.71:8020/ws_config2/GetNodeTree.json"
+        
         this.subMenuCallback = this.subMenuCallback.bind(this);
 
         this.state = {
@@ -15,11 +16,12 @@ class Navigation extends React.Component {
             name: "root"
         }
 
+        var data = {};
         axios.get(URL, {
             params: {
                 NodeId: "1",
                 SessionId: "0",
-                IncludeAttributes: true,
+                IncludeAttributes: false,
                 NumLevels: 2
             }
         }).then(res => {
