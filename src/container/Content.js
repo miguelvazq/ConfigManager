@@ -26,11 +26,11 @@ class Content extends React.Component {
             }
         }).then(res => {
             var data = [];
-            res.data.GetNodeResponse.Attributes.Attribute.map((node, idx) => {
+            res.data.GetNodeResponse.Children.Child.map((node, idx) => {
                 console.log(node);
                 data.push({
-                    menuItem: node.DisplayName,
-                    pane: node.DisplayName
+                    menuItem: node.NodeInfo.Name,
+                    pane: node.NodeInfo.Name,
                 })
             });
 

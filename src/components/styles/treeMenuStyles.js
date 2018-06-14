@@ -1,3 +1,4 @@
+
 'use strict';
 
 export default {
@@ -52,7 +53,8 @@ export default {
                 base: {
                     display: 'inline-block',
                     verticalAlign: 'top',
-                    color: '$white'
+                    color: '$white',
+                    fontWeight: '500'
                 },
                 connector: {
                     width: '2px',
