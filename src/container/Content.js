@@ -24,24 +24,35 @@ class Content extends React.Component {
         this.getTabComponents(this.props.data);
     }
 
-    getTabComponents(nodeId){
-        axios.get(URL, {
-            params: {
-                NodeId: nodeId,
-                SessionId: "0",
-            }
-        }).then(res => {
-            var data = [];
-            res.data.GetNodeResponse.Children.Child.map((node, idx) => {
-                data.push({
-                    menuItem: node.NodeInfo.Name,
-                    pane: node.NodeInfo.Name,
-                })
+    async makeNodeIdRequest(nodeId) {
+        try {
+            const response = axios.get(URL, {
+                params: {
+                    NodeId: nodeId,
+                    SessionId: "0"
+                }
             });
+            return await response;
+        } catch (e) {
+            console.error(e);
+        }
+    }
 
-            this.setState({
-                currentState: data
-            })
+     async getTabComponents(nodeId) {
+        let result = await this.makeNodeIdRequest(nodeId);
+        let data = [];
+
+        result.data.GetNodeResponse.Children.Child.map(async(node, idx) => {
+            let componentSet = await this.makeNodeIdRequest(node.NodeId);
+            let componentSetData = componentSet.data.GetNodeResponse.Attributes.Attribute;
+            //console.log(componentSet.data.GetNodeResponse.Attributes.Attribute)
+            data.push({
+                menuItem: node.NodeInfo.Name,
+                pane: componentSetData
+            });
+        });
+        this.setState({
+            currentState: data
         });
     }
 

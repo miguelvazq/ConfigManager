@@ -8,32 +8,36 @@ const URL = "http://10.239.20.71:8020/ws_config2/GetNodeTree.json"
 class Navigation extends React.Component {
     constructor(props) {
         super(props);
-        
+
         this.subMenuCallback = this.subMenuCallback.bind(this);
 
         this.state = {
-            data: {},
-            name: "root"
+            data: {}
         }
+    }
 
+    async componentDidMount() {
         var data = {};
-        axios.get(URL, {
+        var getNavigation = axios.get(URL, {
             params: {
                 NodeId: "1",
                 SessionId: "0",
                 IncludeAttributes: false,
                 NumLevels: 2
             }
-        }).then(res => {
+        });
+
+        try {
+            let response = await getNavigation;
             let children = [];
             data["name"] = "root"
-            res.data.GetTreeResponse.Tree.Children.Node.map((node, idx) => {
+            response.data.GetTreeResponse.Tree.Children.Node.map((node, idx) => {
                 let subChildren = [];
                 children.push({
                     name: node.NodeInfo.Name
                 });
                 data["children"] = children;
-                node.Children.Node.map((child) => {
+                node.Children.Node.map((child, index) => {
                     subChildren.push({
                         name: child.NodeInfo.Name,
                         id: child.NodeId
@@ -41,16 +45,20 @@ class Navigation extends React.Component {
                     data.children[idx]["children"] = subChildren;
                 });
             });
-             this.setState({
-                 data: data
-             });
+        } catch (e) {
+            console.error('Error: ' + e );
+            data["name"] = "no data found"
+        }
+
+        this.setState({
+            data: data
         });
-    };
+    }
 
     subMenuCallback(dataFromClick) {
         this.props.onClick(dataFromClick);
-    }
 
+    }
 
     render() {
         return (
