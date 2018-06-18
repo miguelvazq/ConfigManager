@@ -4,12 +4,17 @@ import { Tab } from 'semantic-ui-react';
 class TabNavigation extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props)
+        console.log(this.props.data)
+    }
+
+    onTabChange (event, data) {
+        console.log(event)
+        console.log(data)
     }
 
     render() {
         return (
-            <Tab panes={this.props.data} renderActiveOnly={false} />
+            <Tab panes={this.props.data} renderActiveOnly={false} onTabChange={this.onTabChange} />
         )
     }
 }

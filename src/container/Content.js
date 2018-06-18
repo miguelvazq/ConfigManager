@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import TabNavigation from '../components/Tab';
-import ComponentSet from '../components/ComponentSet';
+import ComponentSet from './ComponentSet';
+import InputControl from '../components/InputControl';
 
 const URL = "http://10.239.20.71:8020/ws_config2/GetNode.json"
 
@@ -41,14 +42,13 @@ class Content extends React.Component {
      async getTabComponents(nodeId) {
         let result = await this.makeNodeIdRequest(nodeId);
         let data = [];
+        let componentSetData = [];
 
         result.data.GetNodeResponse.Children.Child.map(async(node, idx) => {
-            let componentSet = await this.makeNodeIdRequest(node.NodeId);
-            let componentSetData = componentSet.data.GetNodeResponse.Attributes.Attribute;
-            //console.log(componentSet.data.GetNodeResponse.Attributes.Attribute)
+            let componentSetData = await this.makeNodeIdRequest(node.NodeId);
             data.push({
                 menuItem: node.NodeInfo.Name,
-                pane: componentSetData
+                pane: idx === 0 ? <ComponentSet key={node.NodeId} data={componentSetData.data.GetNodeResponse.Attributes.Attribute}/> : null
             });
         });
         this.setState({
