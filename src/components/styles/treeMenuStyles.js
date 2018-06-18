@@ -54,7 +54,7 @@ export default {
                     display: 'inline-block',
                     verticalAlign: 'top',
                     color: '$white',
-                    fontWeight: '500'
+                    fontWeight: '600'
                 },
                 connector: {
                     width: '2px',
@@ -67,7 +67,8 @@ export default {
                 },
                 title: {
                     lineHeight: '24px',
-                    verticalAlign: 'middle'
+                    verticalAlign: 'middle',
+                    fontWeight: '500'
                 }
             },
             subtree: {
