@@ -30,7 +30,7 @@ class Navigation extends React.Component {
         try {
             let response = await getNavigation;
             let children = [];
-            data["name"] = "root"
+            data["name"] = "root";
             response.data.GetTreeResponse.Tree.Children.Node.map((node, idx) => {
                 let subChildren = [];
                 children.push({
@@ -57,7 +57,6 @@ class Navigation extends React.Component {
 
     subMenuCallback(dataFromClick) {
         this.props.onClick(dataFromClick);
-
     }
 
     render() {

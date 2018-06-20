@@ -7,13 +7,13 @@ class TabNavigation extends React.Component {
     }
 
     onTabChange (event, data) {
-        console.log(event)
-        console.log(data)
+        //console.log(event)
+        //console.log(data)
     }
 
     render() {
         return (
-            <Tab panes={this.props.data} renderActiveOnly={false} onTabChange={this.onTabChange} />
+            <Tab panes={this.props.data} renderActiveOnly={false} defaultActiveIndex={0} onTabChange={this.onTabChange} />
         )
     }
 }

@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import TabNavigation from '../components/TabNavigation';
 import ComponentSet from './ComponentSet';
-import InputControl from '../components/InputControl';
 
 const URL = "http://10.239.20.71:8020/ws_config2/GetNode.json"
 
@@ -14,12 +13,12 @@ class Content extends React.Component {
         }
     }
 
-    // componentWillReceiveProps(nextProps) {
-    //     if (this.props.data !== nextProps.data){
-    //         this.getTabComponents(nextProps.data);
-    //     }
-    //     this.getTabComponents(nextProps.data);
-    // }
+    componentWillReceiveProps(nextProps) {
+        if (this.props.data !== nextProps.data){
+            this.getTabComponents(nextProps.data);
+        }
+        this.getTabComponents(nextProps.data);
+    }
 
     componentDidMount() {
         this.getTabComponents(this.props.data);
@@ -43,7 +42,12 @@ class Content extends React.Component {
         let result = await this.makeNodeIdRequest(nodeId);
         let data = [];
         let componentSetData = [];
-
+        
+            data.push({
+                menuItem: "Attributes",
+                pane: <ComponentSet key={result.data.GetNodeResponse.NodeId} data={result.data.GetNodeResponse.Attributes.Attribute} />
+            });
+       
         result.data.GetNodeResponse.Children.Child.map(async(node, idx) => {
             let nodeIdResponse = await this.makeNodeIdRequest(node.NodeId);
             componentSetData = nodeIdResponse.data.GetNodeResponse.Attributes.Attribute
@@ -55,6 +59,7 @@ class Content extends React.Component {
                 currentState: data
             });
         });
+        
     };
 
     render() {
@@ -64,7 +69,5 @@ class Content extends React.Component {
             </div>
         )
     }
-
 }
-
 export default Content;

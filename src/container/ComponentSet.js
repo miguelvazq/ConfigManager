@@ -6,7 +6,7 @@ class ComponentSet extends React.Component {
         super(props);
 
         this.state = {
-            components: []
+            component: []
         }
     }
 
@@ -18,33 +18,33 @@ class ComponentSet extends React.Component {
     // }
 
     async componentDidMount() {
-        const events = this.props.data;
-        events.map(async type => 
-            await this.addComponent(type.Type.Name));
-
-            // switch (type.Type.Name) {
-            //     case "default":
-            //         return InputControl
-            //     case "choice":
-            //         return DropdownControl
-            // }
+        const tabs = this.props.data;
+        tabs.map(async type => 
+            await this.addComponent(type));
     }
 
     async addComponent(type) {
-        var componentRequire = [];
+        var controlToImport = type.Type.Name;
+        var controlName;
+        var imported = [];
 
-        switch (type) {
+        switch (controlToImport) {
+            case "xs:string":
+            case "xs:nonNegativeInteger":
+            case "xs:positiveInteger":
+            case "xs:unsignedInt":
             case "default":
-                type = "InputControl"
+                controlName = "InputControl";
+                imported.push(controlName);
             break;
-            case "choice":
-                type = "DropdownControl"
-            break;
+            case "xs:boolean":
+                controlName = "RadioControl";
+                imported.push(controlName);
+            default:
+                controlName = "InputControl";
+                imported.push(controlName);
         }
-
-        console.log(`Loading ${type} component...`);
-
-        const r = await import ('react');
+        // Would like to use this solution
         // import(`../components/${type}.js`).then(component =>{
         //     console.log(component)
         // }
@@ -52,38 +52,26 @@ class ComponentSet extends React.Component {
         //     console.log(component)
         // })
 
-        // require(`../components/${type}`).then(function(component){
-        //     console.log(component);
-        // })
+        if (imported.indexOf(controlName) > -1){
+            console.log("I already have it");
+        } else {
+            require(`../components/${controlName}`);
+        }
 
-        // require(`../components/${type}`).then(component =>{
-        //     this.setState({
-        //         components: component
-        //     });
-        // }).catch(error => {
-        //     console.error(`${type} not yet supported`);
-        // });
-
-    //     require("../components/" + type).then(component =>
-    //         this.setState({
-    //         components: this.state.components.concat(component.default)
-    //         })
-    //   )
-    //   .catch(error => {
-    //     console.error(`"${type}" not yet supported`);
-    //   });
-        //require(`../components/${type}`);
+        this.setState({
+            component: imported
+        });
     }
 
     render() {
-        const { components } = this.state;
-        if (components.length === 0) return <div>Loading...</div>;
-        const componentsElements = components.map(Component => (
+        const { component } = this.state;
+        if (component.length === 0) return <div className="loadingPlaceholder">Loading...</div>;
+        const componentsElements = component.map(Component => (
             <Component key={shortid.generate()} />
         ));
 
         return (
-            {components}
+            {component}
         )
     }
 }
