@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import TabNavigation from '../components/Tab';
+import TabNavigation from '../components/TabNavigation';
 import ComponentSet from './ComponentSet';
 import InputControl from '../components/InputControl';
 
@@ -14,12 +14,12 @@ class Content extends React.Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (this.props.data !== nextProps.data){
-            this.getTabComponents(nextProps.data);
-        }
-        this.getTabComponents(nextProps.data);
-    }
+    // componentWillReceiveProps(nextProps) {
+    //     if (this.props.data !== nextProps.data){
+    //         this.getTabComponents(nextProps.data);
+    //     }
+    //     this.getTabComponents(nextProps.data);
+    // }
 
     componentDidMount() {
         this.getTabComponents(this.props.data);
@@ -45,16 +45,17 @@ class Content extends React.Component {
         let componentSetData = [];
 
         result.data.GetNodeResponse.Children.Child.map(async(node, idx) => {
-            let componentSetData = await this.makeNodeIdRequest(node.NodeId);
+            let nodeIdResponse = await this.makeNodeIdRequest(node.NodeId);
+            componentSetData = nodeIdResponse.data.GetNodeResponse.Attributes.Attribute
             data.push({
                 menuItem: node.NodeInfo.Name,
-                pane: idx === 0 ? <ComponentSet key={node.NodeId} data={componentSetData.data.GetNodeResponse.Attributes.Attribute}/> : null
+                pane: <ComponentSet key={node.NodeId} data={componentSetData} />
+            });
+            this.setState({
+                currentState: data
             });
         });
-        this.setState({
-            currentState: data
-        });
-    }
+    };
 
     render() {
         return (

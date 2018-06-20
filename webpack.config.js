@@ -1,3 +1,4 @@
+const path = require('path');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 const htmlWebpackPlugin = new HtmlWebPackPlugin({
@@ -7,6 +8,11 @@ const htmlWebpackPlugin = new HtmlWebPackPlugin({
 
 module.exports = {
     entry: ["babel-polyfill", "./src/index.js"],
+    output:  {
+        filename: 'main.js',
+        chunkFilename: 'main.js',
+        path: path.resolve(__dirname, 'dist')
+    },
     mode: "development",
     devtool: "source-map",
     module: {

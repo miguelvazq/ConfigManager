@@ -5,7 +5,6 @@ class InputControl extends React.Component {
     constructor(props) {
         super(props);
     }
-
     render() {
         return (
             <Input placeholder={this.props.placeholder}  />
