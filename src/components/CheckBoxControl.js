@@ -1,9 +1,14 @@
-import React from 'react';
-import { Checkbox } from 'semantic-ui-react';
+import React from 'react'
+import { Checkbox } from 'semantic-ui-react'
 
-const CheckBoxControl = () => {
-    <Checkbox toggle />
-    //placeholder={this.props.placeholder} value={this.props.value} type={this.props.type} />
+class CheckBoxControl extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return (
+            <Checkbox toggle />
+        )
+    }
 }
-
 export default CheckBoxControl

@@ -68,7 +68,6 @@ class Navigation extends React.Component {
                 </section>
                 <TreeMenu data={this.state.data} onClick={this.subMenuCallback}  />
             </nav>
-
         )
     }
 }

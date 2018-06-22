@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input } from 'semantic-ui-react'
+import { Input, Popup, Form } from 'semantic-ui-react'
 
 class InputControl extends React.Component {
     constructor(props) {
@@ -7,7 +7,7 @@ class InputControl extends React.Component {
     }
     render() {
         return (
-            <Input type={this.props.type} placeholder={this.props.placeholder}  />
+            <Popup trigger={<Form.Input type={this.props.type} placeholder={this.props.placeholder} label={this.props.label}  />} content={this.props.tooltip} width={6} />
         )
     }
 }

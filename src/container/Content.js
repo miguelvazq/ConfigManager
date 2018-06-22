@@ -42,12 +42,12 @@ class Content extends React.Component {
         let result = await this.makeNodeIdRequest(nodeId);
         let data = [];
         let componentSetData = [];
-        
-            data.push({
-                menuItem: "Attributes",
-                pane: <ComponentSet key={result.data.GetNodeResponse.NodeId} data={result.data.GetNodeResponse.Attributes.Attribute} />
-            });
-       
+
+        data.push({
+            menuItem: "Attributes",
+            pane: <ComponentSet key={result.data.GetNodeResponse.NodeId} data={result.data.GetNodeResponse.Attributes.Attribute} />
+        });
+
         result.data.GetNodeResponse.Children.Child.map(async(node, idx) => {
             let nodeIdResponse = await this.makeNodeIdRequest(node.NodeId);
             componentSetData = nodeIdResponse.data.GetNodeResponse.Attributes.Attribute
@@ -59,7 +59,6 @@ class Content extends React.Component {
                 currentState: data
             });
         });
-        
     };
 
     render() {
