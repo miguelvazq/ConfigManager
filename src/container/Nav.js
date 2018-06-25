@@ -38,6 +38,7 @@ class Navigation extends React.Component {
                 });
                 data["children"] = children;
                 node.Children.Node.map((child, index) => {
+                    
                     subChildren.push({
                         name: child.NodeInfo.Name,
                         id: child.NodeId

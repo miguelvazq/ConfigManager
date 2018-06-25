@@ -13,43 +13,39 @@ class Content extends React.Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (this.props.data !== nextProps.data){
-            this.getTabComponents(nextProps.data);
-        }
-        this.getTabComponents(nextProps.data);
-    }
+    // componentWillReceiveProps(nextProps) {
+    //     if (this.props.data !== nextProps.data){
+    //         this.getTabComponents(nextProps.data);
+    //     }
+    //     this.getTabComponents(nextProps.data);
+    // }
 
     componentDidMount() {
-        this.getTabComponents(this.props.data);
+        this.makeNodeIdRequest(this.props.data);
     }
 
-    async makeNodeIdRequest(nodeId) {
-        try {
-            const response = axios.get(URL, {
-                params: {
-                    NodeId: nodeId,
-                    SessionId: "0"
-                }
-            });
-            return await response;
-        } catch (e) {
-            console.error(e);
-        }
+    childClickEventHandler(data) {
+        this.makeNodeIdRequest(data);
     }
 
-     async getTabComponents(nodeId) {
-        let result = await this.makeNodeIdRequest(nodeId);
-        let data = [];
-        let componentSetData = [];
-
-        data.push({
-            menuItem: "Attributes",
-            pane: <ComponentSet key={result.data.GetNodeResponse.NodeId} data={result.data.GetNodeResponse.Attributes.Attribute} />
+    makeNodeIdRequest(nodeId) {
+        const response = axios.get(URL, {
+            params: {
+                NodeId: nodeId,
+                SessionId: "0"
+            }
+        }).then(function(response){
+            if (response.data.GetNodeResponse.Attributes) {
+                
+            }
+            this.renderTabs(response);
         });
+    }
 
-        result.data.GetNodeResponse.Children.Child.map(async(node, idx) => {
-            let nodeIdResponse = await this.makeNodeIdRequest(node.NodeId);
+    renderTabs(response)  {
+        let data = [];
+        result.data.GetNodeResponse.Children.Child.map((node, idx) => {
+            let nodeIdResponse = this.makeNodeIdRequest(node.NodeId);
             componentSetData = nodeIdResponse.data.GetNodeResponse.Attributes.Attribute
             data.push({
                 menuItem: node.NodeInfo.Name,
@@ -59,12 +55,35 @@ class Content extends React.Component {
                 currentState: data
             });
         });
-    };
+    }
+
+    // async getTabComponents(nodeId) {
+    //     let result = await this.makeNodeIdRequest(nodeId);
+    //     let data = [];
+    //     let componentSetData = [];
+
+    //     data.push({
+    //         menuItem: "Attributes",
+    //         pane: <ComponentSet key={result.data.GetNodeResponse.NodeId} data={result.data.GetNodeResponse.Attributes.Attribute} />
+    //     });
+
+    //     result.data.GetNodeResponse.Children.Child.map(async(node, idx) => {
+    //         let nodeIdResponse = await this.makeNodeIdRequest(node.NodeId);
+    //         componentSetData = nodeIdResponse.data.GetNodeResponse.Attributes.Attribute
+    //         data.push({
+    //             menuItem: node.NodeInfo.Name,
+    //             pane: <ComponentSet key={node.NodeId} data={componentSetData} />
+    //         });
+    //         this.setState({
+    //             currentState: data
+    //         });
+    //     });
+    // };
 
     render() {
         return (
             <div className="content">
-                <TabNavigation data={this.state.currentState} />
+                <TabNavigation data={this.state.currentState} childClickEvent={this.childClickEventHandler} />
             </div>
         )
     }

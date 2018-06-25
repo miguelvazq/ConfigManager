@@ -48,12 +48,14 @@ class ComponentSet extends React.Component {
             case "xs:positiveInteger":
             case "xs:unsignedInt":
             case "default":
-                imported.push( <Form.Group key={shortid.generate()}><InputControl type="text" placeholder={type.DisplayName} label={type.DisplayName} tooltip={type.Tooltip} /> </Form.Group>);
-            break;
+                imported.push(<Form.Group key={shortid.generate()}><InputControl type="text" placeholder={type.DisplayName} label={type.DisplayName} tooltip={type.Tooltip} /> </Form.Group>);
+                break;
             case "xs:boolean":
                 imported.push(<Form.Group key={shortid.generate()}><CheckBoxControl /></Form.Group>);
+                break;
             default:
                 imported.push(<Form.Group key={shortid.generate()}><InputControl type="text" placeholder={type.DisplayName} tooltip={type.Tooltip} /></Form.Group>);
+                break;
             }
         count++
 
