@@ -14,7 +14,7 @@ class ComponentSet extends React.Component {
 
         this.state = {
             component: [],
-            loading: "loading"
+            loading: true
         }
     }
 
@@ -27,6 +27,9 @@ class ComponentSet extends React.Component {
 
     async componentDidMount() {
         this.tabGeneration(this.props.data);
+        this.setState({
+            loading: false
+        })
         // const tabs = this.props.data;
         // const nodeId = this.props.key;
         // tabs.map(async (type) =>
@@ -41,20 +44,17 @@ class ComponentSet extends React.Component {
     }
 
     async addComponent(type, nodeId, tabslength) {
-        var controlToImport = type.Type.Name;
+        var controlToImport = type.Type.BaseType;
         switch (controlToImport) {
-            case "xs:string":
-            case "xs:nonNegativeInteger":
-            case "xs:positiveInteger":
-            case "xs:unsignedInt":
-            case "default":
-                imported.push(<Form.Group key={shortid.generate()}><InputControl type="text" placeholder={type.DisplayName} label={type.DisplayName} tooltip={type.Tooltip} /> </Form.Group>);
+            case "string":
+            case "integer":
+                imported.push(<Form.Group key={shortid.generate()}><InputControl type={controlToImport === "string" ? "text" : "number"} required={type.Required} placeholder={type.DisplayName} defaultValue={type.CurrentValue} label={type.DisplayName} tooltip={type.Tooltip} /> </Form.Group>);
                 break;
-            case "xs:boolean":
-                imported.push(<Form.Group key={shortid.generate()}><CheckBoxControl /></Form.Group>);
+            case "boolean":
+                imported.push(<Form.Group key={shortid.generate()}><CheckBoxControl label={type.DisplayName} required={type.Required} checked={type.CurrentValue === "true" ? true : false}/></Form.Group>);
                 break;
             default:
-                imported.push(<Form.Group key={shortid.generate()}><InputControl type="text" placeholder={type.DisplayName} tooltip={type.Tooltip} /></Form.Group>);
+                imported.push(<Form.Group key={shortid.generate()}><InputControl type="text" placeholder={type.DisplayName} required={type.Required} label={type.DisplayName} tooltip={type.Tooltip} /></Form.Group>);
                 break;
             }
         count++
@@ -102,7 +102,7 @@ class ComponentSet extends React.Component {
 
         return (
             <div className="content">
-                <Form>
+                <Form loading={this.state.loading}>
                     {this.state.component}
                 </Form>
             </div>

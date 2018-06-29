@@ -31,19 +31,39 @@ class Navigation extends React.Component {
             let response = await getNavigation;
             let children = [];
             data["name"] = "root";
-            response.data.GetTreeResponse.Tree.Children.Node.map((node, idx) => {
-                let subChildren = [];
-                children.push({
-                    name: node.NodeInfo.Name
-                });
-                data["children"] = children;
-                node.Children.Node.map((child, index) => {
-                    
-                    subChildren.push({
-                        name: child.NodeInfo.Name,
-                        id: child.NodeId
+            data["toggled"] = true;
+
+            response.data.GetTreeResponse.Tree.Children.Element.map((nodeType, idx) => {
+                if (!nodeType.NodeInfo.Hidden) {
+                    children.push({
+                        name: nodeType.NodeInfo.DisplayName,
+                        children: nodeType.Children
                     });
-                    data.children[idx]["children"] = subChildren;
+                    data["children"] = children;
+                }
+            });
+
+            Promise.all(children).then((response) => {
+                response.map((category, index) => {
+                    let subChildren = [];
+                    category.children.Element.map((children) => {
+                        subChildren.push({
+                            category: children.NodeInfo.DisplayName,
+                            name: children.NodeInfo.Category,
+                            id: children.NodeId
+                        });
+                        data.children[index]["children"] = subChildren;
+                        subChildren.map((nodeName) => {
+                            let nodes = [];
+                            if (nodeName.name != nodeName.category) {
+                                nodes.push({
+                                    name: nodeName.category,
+                                    id: nodeName.id
+                                });
+                                nodeName["children"] = nodes;
+                            }
+                        });
+                    });
                 });
             });
         } catch (e) {

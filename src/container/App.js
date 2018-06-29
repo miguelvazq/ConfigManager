@@ -22,7 +22,6 @@ export class App extends React.Component {
             <div className="container">
                 <Navigation onClick={this.onUpdate} />
                 {this.state.childID !== "" ? <Content data={this.state.childID} /> : null }
-                <div className="footer"></div>
             </div>
         )
     }

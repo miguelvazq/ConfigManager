@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import TabNavigation from '../components/TabNavigation';
 import ComponentSet from './ComponentSet';
+import UtilityBar from '../components/UtilityBar';
 
 const URL = "http://10.239.20.71:8020/ws_config2/GetNode.json"
 
@@ -9,52 +10,69 @@ class Content extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentState: []
+            currentState: [],
+            key: ""
         }
     }
 
     // componentWillReceiveProps(nextProps) {
     //     if (this.props.data !== nextProps.data){
-    //         this.getTabComponents(nextProps.data);
+    //         this.renderTabs(nextProps.data);
     //     }
-    //     this.getTabComponents(nextProps.data);
     // }
 
     componentDidMount() {
-        this.makeNodeIdRequest(this.props.data);
+        this.renderTabs(this.props.data);
     }
 
     childClickEventHandler(data) {
-        this.makeNodeIdRequest(data);
+        this.renderTabs(data);
     }
 
-    makeNodeIdRequest(nodeId) {
-        const response = axios.get(URL, {
-            params: {
-                NodeId: nodeId,
-                SessionId: "0"
-            }
-        }).then(function(response){
-            if (response.data.GetNodeResponse.Attributes) {
-                
-            }
-            this.renderTabs(response);
-        });
+    async makeNodeIdRequest(nodeId) {
+        try {
+            const response = axios.get(URL, {
+                params: {
+                    NodeId: nodeId,
+                    SessionId: "0"
+                }
+            });
+            return await response;
+        } catch (e) {
+            console.error(e);
+        }
     }
 
-    renderTabs(response)  {
+    async renderTabs(nodeId)  {
+        let result = await this.makeNodeIdRequest(nodeId);
         let data = [];
-        result.data.GetNodeResponse.Children.Child.map((node, idx) => {
-            let nodeIdResponse = this.makeNodeIdRequest(node.NodeId);
-            componentSetData = nodeIdResponse.data.GetNodeResponse.Attributes.Attribute
-            data.push({
-                menuItem: node.NodeInfo.Name,
-                pane: <ComponentSet key={node.NodeId} data={componentSetData} />
-            });
-            this.setState({
-                currentState: data
-            });
+        let componentSetData = [];
+
+        result.data.GetNodeResponse.Attributes.Attribute.map((node, idx) => {
+            if (!node.Hidden) {
+                componentSetData.push(node);
+            }
         });
+        data.push({
+            menuItem: "Attributes",
+            pane: <ComponentSet key={result.data.GetNodeResponse.NodeId} data={componentSetData} />
+        });
+
+        this.setState({
+            currentState: data,
+            key: result.data.GetNodeResponse.NodeId
+        });
+        // result.data.GetNodeResponse.Attributes.Attribute.map((node, idx) => {
+        //     let nodeIdResponse = this.makeNodeIdRequest(node.NodeId);
+        //     componentSetData = nodeIdResponse.data.GetNodeResponse.Attributes.Attribute
+        //     data.push({
+        //         menuItem: node.NodeInfo.Name,
+        //         pane: <ComponentSet key={node.NodeId} data={componentSetData} />
+        //     });
+        //     this.setState({
+        //         currentState: data
+        //     });
+        // });
     }
 
     // async getTabComponents(nodeId) {
@@ -83,6 +101,7 @@ class Content extends React.Component {
     render() {
         return (
             <div className="content">
+                <UtilityBar/>
                 <TabNavigation data={this.state.currentState} childClickEvent={this.childClickEventHandler} />
             </div>
         )
