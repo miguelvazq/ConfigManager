@@ -2,9 +2,19 @@ import React, { Component } from 'react'
 import { Button, Dropdown, Menu, Icon } from 'semantic-ui-react'
 
 export default class MenuExampleSizeSmall extends Component {
-  state = { activeItem: 'home' }
+    constructor(props) {
+        super(props);
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+        this.state = {
+            activeItem: 'home'
+        }
+        this.handleItemClick = this.handleItemClick.bind(this);
+    }
+    
+
+    handleItemClick (e, { name }) {
+        this.setState({ activeItem: name })
+    }
 
   render() {
     const { activeItem } = this.state

@@ -15,7 +15,7 @@ class CheckBoxControl extends React.Component {
 
     onChange(event, data){
         this.setState({
-            checked: data.checked
+            checked: this.state.checked === "enabled" ? "disabled" : "enabled"
         })
     }
 

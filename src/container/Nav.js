@@ -33,7 +33,7 @@ class Navigation extends React.Component {
             data["name"] = "root";
             data["toggled"] = true;
 
-            response.data.GetTreeResponse.Tree.Children.Element.map((nodeType, idx) => {
+            response.data.GetTreeResponse.Tree.Children.Element.map((nodeType) => {
                 if (!nodeType.NodeInfo.Hidden) {
                     children.push({
                         name: nodeType.NodeInfo.DisplayName,
