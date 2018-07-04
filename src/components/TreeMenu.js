@@ -12,18 +12,24 @@ class TreeMenu extends React.Component {
     onToggle(node, toggled){
         if(this.state.cursor) {
             this.state.cursor.active = false;
+            this.setState({
+                path: this.state.cursor.name,
+                category: this.state.cursor.category ? this.state.cursor.category :  "",
+                name: this.state.cursor.category ? this.state.cursor.name : ""
+            });
         }
         node.active = true;
         if(node.children) { 
             node.toggled = toggled;
         } else {
-            this.onHandleClick(node.id);
+            console.log(this.state)
+            this.onHandleClick(node.id, this.state.path+this.state.cursor.name+this.state.cursor.category);
         }
         this.setState({ cursor: node });
     }
 
-    onHandleClick(nodeId) {
-        this.props.onClick(nodeId);
+    onHandleClick(nodeId, breadcrumbPath) {
+        this.props.onClick(nodeId, breadcrumbPath);
     }
 
     render() {
