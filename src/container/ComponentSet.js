@@ -3,6 +3,7 @@ import React from 'react';
 import shortid from 'shortid';
 import CheckBoxControl from '../components/CheckBoxControl';
 import InputControl from '../components/InputControl';
+import DropdownControl from '../components/DropdownControl';
 import { Form } from 'semantic-ui-react';
 
 
@@ -30,6 +31,9 @@ class ComponentSet extends React.Component {
         var imported = [];
         tab.map((type) => {
             var controlToImport = type.Type.BaseType;
+            if (type.Type.Limits.ChoiceList && type.Type.BaseType !== "boolean") {
+                controlToImport = "list"
+            }
             switch (controlToImport) {
                 case "string":
                 case "integer":
@@ -37,6 +41,9 @@ class ComponentSet extends React.Component {
                     break;
                 case "boolean":
                     imported.push(<Form.Group key={shortid.generate()}><CheckBoxControl label={type.DisplayName} required={type.Required} checked={type.CurrentValue === "true" ? true : false}/></Form.Group>);
+                    break;
+                case "list":
+                    imported.push(<Form.Group key={shortid.generate()}><DropdownControl label={type.DisplayName} required={type.Required} options={type.Type.Limits.ChoiceList.Choice} /></Form.Group>);
                     break;
                 default:
                     imported.push(<Form.Group key={shortid.generate()}><InputControl type="text" placeholder={type.DisplayName} required={type.Required} label={type.DisplayName} tooltip={type.Tooltip} /></Form.Group>);

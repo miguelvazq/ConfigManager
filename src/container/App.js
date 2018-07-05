@@ -11,9 +11,10 @@ export class App extends React.Component {
         this.onUpdate = this.onUpdate.bind(this);
     }
 
-    onUpdate (value) {
+    onUpdate (value, breadCrumb) {
         this.setState({
-            childID: value
+            childID: value,
+            breadCrumb: breadCrumb
         });
     }
 
@@ -21,7 +22,7 @@ export class App extends React.Component {
         return (
             <div className="container">
                 <Navigation onClick={this.onUpdate} />
-                {this.state.childID !== "" ? <Content data={this.state.childID} /> : null }
+                {this.state.childID !== "" ? <Content data={this.state.childID} breadCrumb={this.state.breadCrumb} /> : null }
                 <div className="footer"></div>
             </div>
         )

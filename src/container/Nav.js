@@ -30,7 +30,7 @@ class Navigation extends React.Component {
         try {
             let response = await getNavigation;
             let children = [];
-            data["name"] = "root";
+            data["name"] = "environment.xml";
             data["toggled"] = true;
 
             response.data.GetTreeResponse.Tree.Children.Element.map((nodeType) => {
@@ -76,8 +76,8 @@ class Navigation extends React.Component {
         });
     }
 
-    subMenuCallback(dataFromClick) {
-        this.props.onClick(dataFromClick);
+    subMenuCallback(dataFromClick, breadCrumb) {
+        this.props.onClick(dataFromClick, breadCrumb);
     }
 
     render() {

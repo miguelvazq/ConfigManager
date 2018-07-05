@@ -4,6 +4,7 @@ import TabNavigation from '../components/TabNavigation';
 import ComponentSet from './ComponentSet';
 import UtilityBar from '../components/UtilityBar';
 import { Sticky} from 'semantic-ui-react';
+import { Label, Menu, Tab } from 'semantic-ui-react'
 import BreadcrumbControl from '../components/BreadCrumb';
 
 const URL = "http://10.239.20.71:8020/ws_config2/GetNode.json"
@@ -59,12 +60,14 @@ class Content extends React.Component {
         });
 
         data.push({
-            menuItem: "Attributes",
+            menuItem: (
+                <Menu.Item key="Attributes">
+                    Attributes <Label color="red">15</Label>
+                </Menu.Item>
+            ),
             pane: {
                 key: result.data.GetNodeResponse.NodeId,
-                content: (
-                    <ComponentSet id={result.data.GetNodeResponse.NodeId} data={attributeSetData} />
-                )
+                content: <ComponentSet id={result.data.GetNodeResponse.NodeId} data={attributeSetData} />
             }
         });
 
@@ -74,7 +77,11 @@ class Content extends React.Component {
                 let nodeIdResponse = await this.makeNodeIdRequest(node.NodeId);
                 componentSetData = nodeIdResponse.data.GetNodeResponse.Attributes.Attribute
                 data.push({
-                    menuItem: node.NodeInfo.DisplayName,
+                    menuItem: (
+                        <Menu.Item key={node.NodeId}>
+                            {node.NodeInfo.DisplayName} <Label color="red">15</Label>
+                        </Menu.Item>
+                    ),
                     pane: {
                         key: node.NodeId,
                         content: <ComponentSet id={node.NodeId} data={componentSetData} />
@@ -91,7 +98,7 @@ class Content extends React.Component {
         return (
             <div className="content" ref="contextRef">
                 <UtilityBar/>
-                <BreadcrumbControl />
+                <BreadcrumbControl data={this.props.breadCrumb} />
                 <TabNavigation data={this.state.currentState} childClickEvent={this.childClickEventHandler} />
             </div>
         )

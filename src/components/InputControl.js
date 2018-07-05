@@ -1,12 +1,12 @@
 import React from 'react'
-import { Popup, Form, Input } from 'semantic-ui-react'
+import { Popup, Form} from 'semantic-ui-react'
 
 class InputControl extends React.Component {
     constructor(props) {
         super(props);
-        
         this.state = {
-            validationError: false
+            validationError: false,
+            requiredCount: 0
         }
 
         this.onChange = this.onChange.bind(this);

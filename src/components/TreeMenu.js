@@ -5,31 +5,36 @@ import style from './styles/treeMenuStyles';
 class TreeMenu extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            parent: "",
+            component: "",
+            node: "",
+        };
         this.onToggle = this.onToggle.bind(this);
     };
 
     onToggle(node, toggled){
-        if(this.state.cursor) {
+        if (this.state.cursor) {
             this.state.cursor.active = false;
-            this.setState({
-                path: this.state.cursor.name,
-                category: this.state.cursor.category ? this.state.cursor.category :  "",
-                name: this.state.cursor.category ? this.state.cursor.name : ""
-            });
         }
         node.active = true;
-        if(node.children) { 
+        if(node.children) {
             node.toggled = toggled;
+            this.state.parent === "" ? this.state.parent = node.name : this.state.component = node.name;
         } else {
-            console.log(this.state)
-            this.onHandleClick(node.id, this.state.path+this.state.cursor.name+this.state.cursor.category);
+            this.state.node = node.name;
+            this.onHandleClick(node.id, this.state);
         }
-        this.setState({ cursor: node });
+
+        this.setState({
+            cursor: node
+        });
     }
 
-    onHandleClick(nodeId, breadcrumbPath) {
-        this.props.onClick(nodeId, breadcrumbPath);
+    onHandleClick(nodeId, breadCrumb) {
+        let path = [];
+        path.push(breadCrumb);
+        this.props.onClick(nodeId, path);
     }
 
     render() {

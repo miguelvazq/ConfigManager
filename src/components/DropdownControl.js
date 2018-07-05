@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Dropdown } from 'semantic-ui-react';
+import { Form, Popup, Dropdown } from 'semantic-ui-react';
 
 class DropdownControl extends React.Component {
     render() {
         return (
-            <Dropdown placeholder={this.props.placeholder} compact selection options={this.props.options}></Dropdown>
+            <Form.Field required={this.props.required} width={8}>
+                <label>{this.props.label}</label>
+                <Form.Dropdown placeholder={this.props.placeholder} selection options={this.props.options}></Form.Dropdown>
+            </Form.Field>
+            
         )
     }
 }
