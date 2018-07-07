@@ -3,8 +3,7 @@ import axios from 'axios';
 import TabNavigation from '../components/TabNavigation';
 import ComponentSet from './ComponentSet';
 import UtilityBar from '../components/UtilityBar';
-import { Sticky} from 'semantic-ui-react';
-import { Label, Menu, Tab } from 'semantic-ui-react'
+import { Label, Menu } from 'semantic-ui-react'
 import BreadcrumbControl from '../components/BreadCrumb';
 
 const URL = "http://10.239.20.71:8020/ws_config2/GetNode.json"

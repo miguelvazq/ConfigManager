@@ -1,6 +1,5 @@
 import React from 'react'
-import { Checkbox } from 'semantic-ui-react'
-import { Label } from 'semantic-ui-react'
+import { Checkbox, Form, Popup } from 'semantic-ui-react'
 
 class CheckBoxControl extends React.Component {
     constructor(props) {
@@ -21,7 +20,12 @@ class CheckBoxControl extends React.Component {
 
     render() {
         return (
-            <Checkbox label={this.props.label + " (" + this.state.checked +")" }  defaultChecked={this.props.checked} toggle onChange={this.onChange} />
+            <Popup trigger={
+                <Form.Field required={this.props.required} width={8}>
+                    <label>{this.props.label}</label>
+                    <Checkbox label={" (" + this.state.checked +")" }  defaultChecked={this.props.checked} toggle onChange={this.onChange} />
+                </Form.Field>}
+            content={this.props.tooltip}/>
         )
     }
 }
