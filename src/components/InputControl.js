@@ -27,7 +27,7 @@ class InputControl extends React.Component {
 
     render() {
         return (
-            <Form.Field required={this.props.required}>  {/*width={8}*/}
+            <Form.Field required={this.props.required} width={8}>
                 <label>{this.props.label}</label>
                 {this.props.tooltip ? <Popup trigger={<Form.Input type={this.props.type} placeholder={this.props.placeholder} defaultValue={this.props.defaultValue} onChange={this.onChange} error={this.state.validationError} />} content={this.props.tooltip}/> : <Form.Input type={this.props.type} placeholder={this.props.placeholder} defaultValue={this.props.defaultValue} onChange={this.onChange} error={this.state.validationError} /> }
             </Form.Field>

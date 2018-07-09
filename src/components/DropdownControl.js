@@ -24,7 +24,7 @@ class DropdownControl extends React.Component {
 
     render() {
         return (
-            <Form.Field required={this.props.required}> {/*width={8}*/}
+            <Form.Field required={this.props.required} width={8}>
                 <label>{this.props.label}</label>
                 {this.props.tooltip ? <Popup trigger={<Form.Dropdown placeholder={this.props.placeholder} selection options={this.state.options}></Form.Dropdown>} content={this.props.tooltip}/> : <Form.Dropdown placeholder={this.props.placeholder} selection options={this.state.options}></Form.Dropdown>}
             </Form.Field>

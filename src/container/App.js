@@ -1,8 +1,10 @@
 import * as React from "react";
-import Entry from "./Entry";
 import Navigation from "./Nav";
 import Content from "./Content";
-
+import Entry from "./Entry";
+import Environment from "./Environment";
+import Error from "../components/Error";
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import { Grid, Responsive } from 'semantic-ui-react'
 
 export class App extends React.Component {
@@ -23,16 +25,23 @@ export class App extends React.Component {
 
     render() {
         return (
-			<Grid>
-                <Grid.Row stretched>
-                    <Grid.Column width={3}>
-                        <Navigation onClick={this.onUpdate} />
-                    </Grid.Column>
-                    <Grid.Column width={13}>
-                        {this.state.childID !== "" ? <Content data={this.state.childID} breadCrumb={this.state.breadCrumb} /> : null }
-                    </Grid.Column>
-                </Grid.Row>
-            </Grid>
+            <BrowserRouter>
+                <Switch>
+                    <Route path="/" exact component={Entry} />
+                    <Route path="/environment" exact render={props => <Environment {...props} />} />
+                    <Route component={Error} />
+                </Switch>
+            </BrowserRouter>
+			// <Grid>
+            //     <Grid.Row stretched>
+            //         <Grid.Column width={3}>
+            //             <Navigation onClick={this.onUpdate} />
+            //         </Grid.Column>
+            //         <Grid.Column width={13}>
+            //             {this.state.childID !== "" ? <Content data={this.state.childID} breadCrumb={this.state.breadCrumb} /> : null }
+            //         </Grid.Column>
+            //     </Grid.Row>
+            // </Grid>
 
             // <div className="container">
             //     <Navigation onClick={this.onUpdate} />

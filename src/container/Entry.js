@@ -1,15 +1,15 @@
 import * as React from "react";
-import {BrowserRouter as Router, Route} from "react-router-dom";
 import axios from "axios";
-import {Form, Grid, Image, Divider} from "semantic-ui-react"
+import {Form, Grid, Image, Divider, Dropdown} from "semantic-ui-react"
 import ButtonControl from '../components/ButtonControl';
 import DropdownControl from '../components/DropdownControl';
 import InputControl from '../components/InputControl';
 import homeIcon from "../assets/img/hpcc-logo.png";
+import { NavLink } from "react-router-dom";
 
 const URL = "http://10.239.20.71:8020/ws_config2"
 
-export class Entry extends React.Component{
+class Entry extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -51,6 +51,7 @@ export class Entry extends React.Component{
 
 
     async componentDidMount() {
+        const files = [];
         const openSession = axios.get(URL+"/OpenSession.json", {});
         try {
             let response = await openSession;
@@ -63,15 +64,16 @@ export class Entry extends React.Component{
                 });
                 const environmentResponse = await getEnvironments;
                 const environmentList = environmentResponse.data.GetEnvironmentListResponse.EnvironmentFiles.EnvironmentFile
-                const files = [];
                 environmentList.map((file) =>{
                     files.push({
-                        DisplayName: file.Filename,
-                        Value: file.Filename,
+                        text: file.Filename,
+                        value: file.Filename,
                     });
                 });
-                this.setState({
-                    environments: files
+                Promise.all(files).then((response) => {
+                    this.setState({
+                        environments: response
+                    });
                 });
             }
         } catch (e) {
@@ -91,16 +93,20 @@ export class Entry extends React.Component{
                             <Grid.Column>
                                 <Form>
                                     <Form.Field>
-                                        <DropdownControl label={"Existing environment"} placeholder='Select an environment' fluid selection label="Select an environment" options={this.state.environments} onChange={this.handleFileChange} />
+                                        <Dropdown label="Existing environment" placeholder='Select an environment' fluid selection label="Select an environment" options={this.state.environments} onChange={this.handleFileChange} />
                                     </Form.Field>
                                     <Divider horizontal>Or</Divider>
                                     <Form.Field>
-                                        <InputControl label="Generate new environment using wizard" disabled={this.state.wizardEnvironment} placeholder="Enter file name" onChange={this.handleWizardEnvironment} />
+                                        <label>Generate new environment using wizard</label>
+                                        <input disabled={this.state.wizardEnvironment} placeholder="Enter file name" onChange={this.handleWizardEnvironment} />
+                                        {/* <InputControl label="Generate new environment using wizard" disabled={this.state.wizardEnvironment} placeholder="Enter file name" onChange={this.handleWizardEnvironment} /> */}
                                     </Form.Field>
                                     <Form.Field>
-                                        <InputControl label="Create blank environment" disabled={this.state.blankEnvironment} placeholder="Enter file name" onChange={this.onChange} />
+                                        <label>Create blank environment</label>
+                                        <input disabled={this.state.blankEnvironment} placeholder="Enter file name" onChange={this.onChange} />
+                                        {/* <InputControl label="Create blank environment" disabled={this.state.blankEnvironment} placeholder="Enter file name" onChange={this.onChange} /> */}
                                     </Form.Field>
-                                    <ButtonControl disabled={!this.state.environmentSelected} type="submit" color="blue" floated="right" text="Next"></ButtonControl>
+                                    <NavLink to="/environment"><ButtonControl disabled={!this.state.environmentSelected} type="submit" color="blue" floated="right" text="Next" onClick={this.props.onClick}></ButtonControl></NavLink>
                                 </Form>
                             </Grid.Column>
                         </Grid.Row>
@@ -110,3 +116,4 @@ export class Entry extends React.Component{
         )
     }
 }
+export default Entry;

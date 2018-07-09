@@ -4,7 +4,7 @@ import shortid from 'shortid';
 import CheckBoxControl from '../components/CheckBoxControl';
 import InputControl from '../components/InputControl';
 import DropdownControl from '../components/DropdownControl';
-import { Form } from 'semantic-ui-react';
+import { Form, Grid } from 'semantic-ui-react';
 
 
 class ComponentSet extends React.Component {
@@ -57,9 +57,11 @@ class ComponentSet extends React.Component {
 
     render() {
         return (
-            <Form>
-                {this.state.component}
-            </Form>
+           
+                        <Form>
+                            {this.state.component}
+                        </Form>
+           
         )
     }
 }

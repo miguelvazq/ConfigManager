@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Dropdown, Menu, Icon } from 'semantic-ui-react'
-import DialogControl from '../components/DialogControl';
+import DialogControl from './DialogControl';
 
 export default class MenuExampleSizeSmall extends Component {
     constructor(props) {

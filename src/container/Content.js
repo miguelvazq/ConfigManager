@@ -61,7 +61,7 @@ class Content extends React.Component {
         data.push({
             menuItem: (
                 <Menu.Item key="Attributes">
-                    Attributes <Label color="red">15</Label>
+                    Attributes <Label color="red">1</Label>
                 </Menu.Item>
             ),
             pane: {
@@ -78,7 +78,7 @@ class Content extends React.Component {
                 data.push({
                     menuItem: (
                         <Menu.Item key={node.NodeId}>
-                            {node.NodeInfo.DisplayName} <Label color="red">15</Label>
+                            {node.NodeInfo.DisplayName} {/*<Label color="red">15</Label>*/}
                         </Menu.Item>
                     ),
                     pane: {
