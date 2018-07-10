@@ -98,12 +98,12 @@ class Entry extends React.Component{
                                     <Divider horizontal>Or</Divider>
                                     <Form.Field>
                                         <label>Generate new environment using wizard</label>
-                                        <input disabled={this.state.wizardEnvironment} placeholder="Enter file name" onChange={this.handleWizardEnvironment} />
+                                        <input /*disabled={this.state.wizardEnvironment}*/ disabled="true" placeholder="Enter file name" onChange={this.handleWizardEnvironment} />
                                         {/* <InputControl label="Generate new environment using wizard" disabled={this.state.wizardEnvironment} placeholder="Enter file name" onChange={this.handleWizardEnvironment} /> */}
                                     </Form.Field>
                                     <Form.Field>
                                         <label>Create blank environment</label>
-                                        <input disabled={this.state.blankEnvironment} placeholder="Enter file name" onChange={this.onChange} />
+                                        <input /*disabled={this.state.blankEnvironment}*/ disabled="true" placeholder="Enter file name" onChange={this.onChange} />
                                         {/* <InputControl label="Create blank environment" disabled={this.state.blankEnvironment} placeholder="Enter file name" onChange={this.onChange} /> */}
                                     </Form.Field>
                                     <NavLink to="/environment"><ButtonControl disabled={!this.state.environmentSelected} type="submit" color="blue" floated="right" text="Next" onClick={this.props.onClick}></ButtonControl></NavLink>

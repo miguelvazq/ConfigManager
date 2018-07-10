@@ -11,7 +11,8 @@ module.exports = {
     output:  {
         filename: 'main.js',
         chunkFilename: 'main.js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: 'http://localhost:8080/'
     },
     mode: "development",
     devtool: "source-map",
@@ -56,6 +57,9 @@ module.exports = {
                 },
             },
         ]
+    },
+    devServer: {
+        historyApiFallback: true,
     },
     plugins: [htmlWebpackPlugin]
 };

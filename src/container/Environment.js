@@ -31,12 +31,6 @@ class Environment extends React.Component {
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
-
-            // <div className="container">
-            //     <Navigation onClick={this.onUpdate} />
-            //     {this.state.childID !== "" ? <Content data={this.state.childID} breadCrumb={this.state.breadCrumb} /> : null }
-            //     <div className="footer"></div>
-            // </div>
         )
     }
 }

@@ -1,6 +1,6 @@
 import React from "react";
 
-const Error = () => {
+const RouteNotFound = () => {
     return (
         <div>
             <p>There was an error with the route you entered </p>
@@ -8,4 +8,4 @@ const Error = () => {
     );
 };
 
-export default Error;
+export default RouteNotFound;
