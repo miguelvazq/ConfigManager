@@ -2,8 +2,6 @@ import * as React from "react";
 import axios from "axios";
 import {Form, Grid, Image, Divider, Dropdown} from "semantic-ui-react"
 import ButtonControl from '../components/ButtonControl';
-import DropdownControl from '../components/DropdownControl';
-import InputControl from '../components/InputControl';
 import homeIcon from "../assets/img/hpcc-logo.png";
 import { NavLink } from "react-router-dom";
 

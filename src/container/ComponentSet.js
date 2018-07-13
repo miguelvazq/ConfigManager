@@ -1,5 +1,4 @@
 import React from 'react';
-//import Loadable from 'react-loadable';
 import shortid from 'shortid';
 import CheckBoxControl from '../components/CheckBoxControl';
 import InputControl from '../components/InputControl';
@@ -40,7 +39,7 @@ class ComponentSet extends React.Component {
                     imported.push(<Form.Group key={shortid.generate()}><InputControl type={controlToImport === "string" ? "text" : "number"} required={type.Required} placeholder={type.DisplayName} defaultValue={type.CurrentValue} label={type.DisplayName} tooltip={type.Tooltip} /> </Form.Group>);
                     break;
                 case "boolean":
-                    imported.push(<Form.Group key={shortid.generate()}><CheckBoxControl label={type.DisplayName} required={type.Required} checked={type.CurrentValue === "true" ? true : false}/></Form.Group>);
+                    imported.push(<Form.Group key={shortid.generate()}><CheckBoxControl label={type.DisplayName} checked={type.CurrentValue === "true" ? true : false}/></Form.Group>);
                     break;
                 case "list":
                     imported.push(<Form.Group key={shortid.generate()}><DropdownControl label={type.DisplayName} required={type.Required} options={type.Type.Limits.ChoiceList.Choice} /></Form.Group>);
@@ -57,11 +56,9 @@ class ComponentSet extends React.Component {
 
     render() {
         return (
-           
-                        <Form>
-                            {this.state.component}
-                        </Form>
-           
+            <Form>
+                {this.state.component}
+            </Form>
         )
     }
 }

@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { Button, Dropdown, Menu, Icon } from 'semantic-ui-react'
+import React, { Component } from "react"
+import { Button, Dropdown, Menu, Icon } from "semantic-ui-react"
 import DialogControl from './DialogControl';
 
 export default class MenuExampleSizeSmall extends Component {
@@ -7,28 +7,30 @@ export default class MenuExampleSizeSmall extends Component {
         super(props);
 
         this.state = {
-            activeItem: 'home'
+            activeItem: "home",
+            locked: "lock",
+            lockStatus: "locked"
         }
-        this.handleItemClick = this.handleItemClick.bind(this);
+        this.handleLockClick = this.handleLockClick.bind(this);
     }
 
-    handleItemClick (e, { name }) {
-        this.setState({ activeItem: name })
+    // handleItemClick (e, { name }) {
+    //     this.setState({ activeItem: name })
+    // }
+
+    handleLockClick (e, data) {
+        data.icon === "lock" ? this.setState({locked: "lock open", lockStatus: "Unlocked"}) : this.setState({locked: "lock", lockStatus: "Locked"});
     }
 
   render() {
-    const { activeItem } = this.state
-
     return (
-      <Menu size='small'>
-        <Menu.Item icon="save" name='save' active={activeItem === 'save'} onClick={this.handleItemClick} />
-        <Menu.Item
-            icon="plus"
-            name='Add a component'
-            active={activeItem === 'Add a component'}
-            onClick={this.handleItemClick}
-        />
-        <Menu.Menu position='right'>
+      <Menu inverted color="blue" size="small">
+        <Menu.Item icon={this.state.locked} name={this.state.lockStatus} onClick={this.handleLockClick} />
+        <Menu.Item icon="save" name="save" onClick={this.handleLockClick} />
+        <Menu.Item icon="pencil" name="save as" onClick={this.handleLockClick} />
+        <Menu.Item icon="plus" name="Add a component" onClick={this.handleLockClick} />
+        <Menu.Item icon="copy" name="compare environments" onClick={this.handleLockClick} />
+        <Menu.Menu position="right">
           <Dropdown item trigger={<span><Icon name="info"/>Error/Warnings</span>}>
             <Dropdown.Menu>
               <Dropdown.Item color="red">Errors</Dropdown.Item>
@@ -36,7 +38,7 @@ export default class MenuExampleSizeSmall extends Component {
               <Dropdown.Item color="yellow">Information</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
-          <Menu.Item name='XML Mode' icon="code"active={activeItem === 'XML Mode'} onClick={this.handleItemClick} />
+          <Menu.Item name="XML Mode" icon="code" onClick={this.handleLockClick} />
           <Menu.Item>
             <Button primary><Icon name="check"/>Validate Envionment</Button>
           </Menu.Item>

@@ -12,7 +12,8 @@ class Navigation extends React.Component {
         this.subMenuCallback = this.subMenuCallback.bind(this);
 
         this.state = {
-            data: {}
+            data: {},
+            defaultNode: "DafileServProcess"
         }
     }
 
@@ -21,7 +22,7 @@ class Navigation extends React.Component {
         var getNavigation = axios.get(URL, {
             params: {
                 NodeId: "1",
-                SessionId: "0",
+                SessionId: "39",
                 IncludeAttributes: false,
                 NumLevels: 2
             }
@@ -40,6 +41,11 @@ class Navigation extends React.Component {
                         children: nodeType.Children
                     });
                     data["children"] = children;
+                    // data.children.map((element) => {
+                    //     if (element.name === "Software") {
+                    //         element["toggled"] = true;
+                    //     }
+                    // });
                 }
             });
 
@@ -53,14 +59,24 @@ class Navigation extends React.Component {
                             id: children.NodeId
                         });
                         data.children[index]["children"] = subChildren;
-                        subChildren.map((nodeName) => {
+                        if (index === 1) {
+                            subChildren
+                        }
+                        subChildren.map((nodeName, idx) => {
+                            // if (nodeName.name === "DafilesrvProcess") {
+                            //     nodeName["toggled"] = true;
+                            // }
                             let nodes = [];
+
                             if (nodeName.name != nodeName.category) {
                                 nodes.push({
                                     name: nodeName.category,
                                     id: nodeName.id
                                 });
                                 nodeName["children"] = nodes;
+                                // if (nodeName.name === "DafilesrvProcess") {
+                                //     nodes[0]["active"] = true;
+                                // }
                             }
                         });
                     });

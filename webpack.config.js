@@ -12,7 +12,7 @@ module.exports = {
         filename: 'main.js',
         chunkFilename: 'main.js',
         path: path.resolve(__dirname, 'dist'),
-        publicPath: 'http://localhost:8080/'
+        //publicPath: 'http://localhost:8080/'
     },
     mode: "development",
     devtool: "source-map",
@@ -33,14 +33,6 @@ module.exports = {
                 test: /\.css$/,
                 use: [ 'style-loader', 'css-loader' ]
             },
-            {
-                test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-                loader: require.resolve('url-loader'),
-                options: {
-                  limit: 10000,
-                  name: 'assets/images/[name].[hash:8].[ext]',
-                },
-              },
             {
                 test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
                 loader: require.resolve('url-loader'),

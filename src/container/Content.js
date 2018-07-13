@@ -37,7 +37,7 @@ class Content extends React.Component {
             const response = axios.get(URL, {
                 params: {
                     NodeId: nodeId,
-                    SessionId: "0"
+                    SessionId: "39"
                 }
             });
             return await response;
@@ -78,7 +78,7 @@ class Content extends React.Component {
                 data.push({
                     menuItem: (
                         <Menu.Item key={node.NodeId}>
-                            {node.NodeInfo.DisplayName} {/*<Label color="red">15</Label>*/}
+                            {node.NodeInfo.Category} {/*<Label color="red">15</Label>*/}
                         </Menu.Item>
                     ),
                     pane: {

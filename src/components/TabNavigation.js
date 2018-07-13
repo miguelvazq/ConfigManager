@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tab } from 'semantic-ui-react';
+import { Tab, Segment } from 'semantic-ui-react';
 
 class TabNavigation extends React.Component {
     constructor(props) {
@@ -24,7 +24,9 @@ class TabNavigation extends React.Component {
 
     render() {
         return (
-            <Tab panes={this.props.data} renderActiveOnly={false} defaultActiveIndex={0} loading={this.state.loading === true ? "loading" : ""} />
+            <Segment>
+                <Tab panes={this.props.data} renderActiveOnly={false} defaultActiveIndex={0} loading={this.state.loading === true ? "loading" : ""} />
+            </Segment>
         )
     }
 }
