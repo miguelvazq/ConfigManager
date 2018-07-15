@@ -20,12 +20,7 @@ class CheckBoxControl extends React.Component {
 
     render() {
         return (
-            
-                <Form.Field required={this.props.required} width={8}>
-                    <label>{this.props.label}</label>
-                    {this.props.tooltip ? <Popup trigger={<Checkbox label={" (" + this.state.checked +")" }  defaultChecked={this.props.checked} toggle onChange={this.onChange} />}  content={this.props.tooltip}/> : <Checkbox label={" (" + this.state.checked +")" }  defaultChecked={this.props.checked} toggle onChange={this.onChange} /> }
-                </Form.Field>
-            
+            this.props.tooltip ? <Popup trigger={<Checkbox label={" (" + this.state.checked +")" }  defaultChecked={this.props.checked} toggle onChange={this.onChange} />}  content={this.props.tooltip}/> : <Checkbox label={" (" + this.state.checked +")" }  defaultChecked={this.props.checked} toggle onChange={this.onChange} /> 
         )
     }
 }

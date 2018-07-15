@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tab, Segment } from 'semantic-ui-react';
 
-class TabNavigation extends React.Component {
+export default class TabNavigation extends React.Component {
     constructor(props) {
         super(props);
         this.onTabChange = this.onTabChange.bind(this);
@@ -30,5 +30,3 @@ class TabNavigation extends React.Component {
         )
     }
 }
-
-export default TabNavigation

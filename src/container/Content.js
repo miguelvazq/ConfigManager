@@ -2,13 +2,12 @@ import React from 'react';
 import axios from 'axios';
 import TabNavigation from '../components/TabNavigation';
 import ComponentSet from './ComponentSet';
-import UtilityBar from '../components/UtilityBar';
 import { Label, Menu } from 'semantic-ui-react'
 import BreadcrumbControl from '../components/BreadCrumb';
 
 const URL = "http://10.239.20.71:8020/ws_config2/GetNode.json"
 
-class Content extends React.Component {
+export default class Content extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -95,12 +94,10 @@ class Content extends React.Component {
 
     render() {
         return (
-            <div className="content" ref="contextRef">
-                <UtilityBar/>
+            <div className="content">
                 <BreadcrumbControl data={this.props.breadCrumb} />
                 <TabNavigation data={this.state.currentState} childClickEvent={this.childClickEventHandler} />
             </div>
         )
     }
 }
-export default Content;

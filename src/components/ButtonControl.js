@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'semantic-ui-react';
 
-class ButtonControl extends React.Component {
+export default class ButtonControl extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -9,7 +9,7 @@ class ButtonControl extends React.Component {
     }
 
     onClick(event, data) {
-        console.log(event, data)
+        this.props.onClick(data)
     }
 
     render() {
@@ -18,5 +18,3 @@ class ButtonControl extends React.Component {
         )
     }
 }
-
-export default ButtonControl;

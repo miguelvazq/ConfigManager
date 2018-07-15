@@ -2,7 +2,7 @@ import React from 'react';
 import {Treebeard} from 'react-treebeard';
 import style from './styles/treeMenuStyles';
 
-class TreeMenu extends React.Component {
+export default class TreeMenu extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -48,4 +48,3 @@ class TreeMenu extends React.Component {
         );
     }
 }
-export default TreeMenu;

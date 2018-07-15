@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+$primary: #1A99D5;
+$accentToPrimary: #3c94bc;
+$white: #fff;
+$contentFontColor: #3b3e43;
+$bannerColor: #00b5ad;
+$fontFamily: 'Roboto';
+$regularFont: 400;
+$mediumFont: 500;
+$boldFont: 700;
+
+.ui.huge.header
+    font-size: 8em;
+
+.ui.inverted.blue.menu, .ui.inverted.menu .blue.active.item
+    background-color: $primary;
+
+.ui.primary.button, .ui.primary.buttons .button
+    background-color: $primary;
+
+.ui.blue.button:active, .ui.blue.buttons .button:active
+    background-color: $primary;
+
+.ui.toggle.checkbox input:checked~.box:before, .ui.toggle.checkbox input:checked~label:before
+    background-color: $primary !important;
+/*-----------------ENTRY----------------------*/
+
+.entryContainer
+    width: 100%;
+    height: 100%;
+    background: #1A9BD7;
+
+.selectConfiguration
+    position: absolute;
+    background: #fff;
+    width: 700px;
+    margin: -250px 0 0 -350px;
+    top: 50%;
+    left: 50%;
+    padding: 15px;
+    border-radius: 5px;
+
+h3, p
+    text-align: center;
+
+
+/* ----------------NAV-----------------------*/
+
+    
+// .navContainer
+//     border-top: 1px solid black;
+//     padding: 30px;
+//     background: #343434;
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     bottom: 0;
+//     height: 100% !important;
+
+nav
+    width: 17%;
+    height: 100% !important;
+    background-color: $primary;
+    color: $white;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: fixed;
+    top: 0;
+    left: 30;
+    bottom: 0;
+
+section
+    border-bottom: solid 1px darken($primary, 10%);
+    background-color: $accentToPrimary;
+    padding: 10px 0 0 20px;
+
+.logoContainer
+    width: 40px;
+    height: 20px;
+    background: $primary;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+    display: inline-table;
+    margin-right: 8px;
+    font-weight: $mediumFont;
+    font-size: 18px;
+
+.logo
+    background-color: darken($primary, 10%);
+    height: 70px;
+
+    span
+        font-size: 15px;
+
+.configuring
+    background-color: $primary;
+    height: 80px;
+
+    span
+        font-size: 14px;
+
+/* -----------------CONTENT------------------*/
+
+.content
+    margin: 20px 0 0 0px;
+    padding: 0 0 0 0px;
+    width: 100%;
+    color: $contentFontColor;
+
+/*-------------------UTILITY BAR-------------*/
+    
+.fixedUtilityBar
+    margin: 20px 0 0 0;
+    position: fixed;
+    top: 20;
+
+/*------------------ BANNER ------------------*/
+
+.banner
+    width: 100% !important;
+    height: 45px;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    margin: 0;
+    background-color: $bannerColor;
+
+/*------------------ 404 ---------------------*/
+
+.errorContainer
+    width: 100%;
+    height: 100%;
+    background: $white;
+    text-align: center;
+
+.routeNotFoundError
+    position: absolute;
+    background: #fff;
+    width: 700px;
+    margin: -300px 0 0 -350px;
+    top: 50%;
+    left: 50%;
+    padding: 15px;
+    border-radius: 5px;
+

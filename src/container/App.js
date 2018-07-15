@@ -9,8 +9,8 @@ export class App extends React.Component {
         return (
             <BrowserRouter>
                 <Switch>
-                    <Route path="/" exact component={Entry} />
-                    <Route path="/environment" exact component={Environment} />
+                    <Route path="/" exact render={(...props) => <Entry />} />
+                    <Route path="/environment" exact render={(...props) => <Environment />} />
                     <Route component={RouteNotFound} />
                 </Switch>
             </BrowserRouter>

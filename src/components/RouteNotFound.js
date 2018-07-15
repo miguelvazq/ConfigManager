@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 const RouteNotFound = () => {
     return (
         <div className="errorContainer">
-            <div className="error">
+            <div className="routeNotFoundError">
                 <Image src={homeIcon} centered size='medium' />
                 <Header size="huge" textAlign='center'>404</Header>
                 <Header as='h4'>The page you are looking for does not exist </Header>

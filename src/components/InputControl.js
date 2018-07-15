@@ -1,7 +1,7 @@
 import React from 'react'
 import { Popup, Form} from 'semantic-ui-react'
 
-class InputControl extends React.Component {
+export default class InputControl extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -27,11 +27,7 @@ class InputControl extends React.Component {
 
     render() {
         return (
-            <Form.Field required={this.props.required} width={8}>
-                <label>{this.props.label}</label>
-                {this.props.tooltip ? <Popup trigger={<Form.Input type={this.props.type} placeholder={this.props.placeholder} defaultValue={this.props.defaultValue} onChange={this.onChange} error={this.state.validationError} />} content={this.props.tooltip}/> : <Form.Input type={this.props.type} placeholder={this.props.placeholder} defaultValue={this.props.defaultValue} onChange={this.onChange} error={this.state.validationError} /> }
-            </Form.Field>
+            this.props.tooltip ? <Popup trigger={<Form.Input type={this.props.type} placeholder={this.props.placeholder} defaultValue={this.props.defaultValue} onChange={this.onChange} error={this.state.validationError} />} content={this.props.tooltip}/> : <Form.Input type={this.props.type} placeholder={this.props.placeholder} defaultValue={this.props.defaultValue} onChange={this.onChange} error={this.state.validationError} />
         )
     }
 }
-export default InputControl

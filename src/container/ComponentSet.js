@@ -26,6 +26,10 @@ class ComponentSet extends React.Component {
         this.addComponent(tab, nodeId);
     }
 
+    handleDropDownChange(data) {
+        console.log(data)
+    }
+
     addComponent(tab, id) {
         var imported = [];
         tab.map((type) => {
@@ -36,22 +40,22 @@ class ComponentSet extends React.Component {
             switch (controlToImport) {
                 case "string":
                 case "integer":
-                    imported.push(<Form.Group key={shortid.generate()}><InputControl type={controlToImport === "string" ? "text" : "number"} required={type.Required} placeholder={type.DisplayName} defaultValue={type.CurrentValue} label={type.DisplayName} tooltip={type.Tooltip} /> </Form.Group>);
+                    imported.push(<Form.Group key={shortid.generate()}><Form.Field required={type.Required} width={8}><label>{type.DisplayName}</label><InputControl type={controlToImport === "string" ? "text" : "number"} required={type.Required} placeholder={type.DisplayName} defaultValue={type.CurrentValue} tooltip={type.Tooltip} /></Form.Field></Form.Group>);
                     break;
                 case "boolean":
-                    imported.push(<Form.Group key={shortid.generate()}><CheckBoxControl label={type.DisplayName} checked={type.CurrentValue === "true" ? true : false}/></Form.Group>);
+                    imported.push(<Form.Group key={shortid.generate()}><Form.Field width={8}><label>{type.DisplayName}</label><CheckBoxControl checked={type.CurrentValue === "true" ? true : false} tooltip={type.Tooltip}/></Form.Field></Form.Group>);
                     break;
                 case "list":
-                    imported.push(<Form.Group key={shortid.generate()}><DropdownControl label={type.DisplayName} required={type.Required} options={type.Type.Limits.ChoiceList.Choice} /></Form.Group>);
+                    imported.push(<Form.Group key={shortid.generate()}><Form.Field required={type.Required} width={8}><label>{type.DisplayName}</label><DropdownControl options={type.Type.Limits.ChoiceList.Choice} onChange={this.handleDropDownChange} /></Form.Field></Form.Group>);
                     break;
                 default:
-                    imported.push(<Form.Group key={shortid.generate()}><InputControl type="text" placeholder={type.DisplayName} required={type.Required} label={type.DisplayName} tooltip={type.Tooltip} /></Form.Group>);
+                    imported.push(<Form.Group key={shortid.generate()}><Form.Field required={type.Required} width={8}><label>{type.DisplayName}</label><InputControl type="text" required={type.Required} placeholder={type.DisplayName} tooltip={type.Tooltip} /></Form.Field></Form.Group>);
                     break;
             }
         });
         this.setState({
             component: imported
-        })
+        });
     }
 
     render() {

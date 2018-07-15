@@ -23,27 +23,30 @@ export default class MenuExampleSizeSmall extends Component {
     }
 
   render() {
+    const utilityBarStyle = {
+      margin: '20px 0 0 0',
+    };
     return (
-      <Menu inverted color="blue" size="small">
-        <Menu.Item icon={this.state.locked} name={this.state.lockStatus} onClick={this.handleLockClick} />
-        <Menu.Item icon="save" name="save" onClick={this.handleLockClick} />
-        <Menu.Item icon="pencil" name="save as" onClick={this.handleLockClick} />
-        <Menu.Item icon="plus" name="Add a component" onClick={this.handleLockClick} />
-        <Menu.Item icon="copy" name="compare environments" onClick={this.handleLockClick} />
-        <Menu.Menu position="right">
-          <Dropdown item trigger={<span><Icon name="info"/>Error/Warnings</span>}>
-            <Dropdown.Menu>
-              <Dropdown.Item color="red">Errors</Dropdown.Item>
-              <Dropdown.Item color="orange">Warnings</Dropdown.Item>
-              <Dropdown.Item color="yellow">Information</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-          <Menu.Item name="XML Mode" icon="code" onClick={this.handleLockClick} />
-          <Menu.Item>
-            <Button primary><Icon name="check"/>Validate Envionment</Button>
-          </Menu.Item>
-        </Menu.Menu>
-      </Menu>
+        <Menu inverted color="blue" size="small" style={utilityBarStyle}>
+          <Menu.Item color="green" icon={this.state.locked} name={this.state.lockStatus} onClick={this.handleLockClick} />
+          <Menu.Item icon="save" name="save" onClick={this.handleLockClick} />
+          <Menu.Item icon="pencil" name="save as" onClick={this.handleLockClick} />
+          <Menu.Item icon="plus" name="Add a component" onClick={this.handleLockClick} />
+          <Menu.Item icon="copy" name="compare environments" onClick={this.handleLockClick} />
+          <Menu.Menu position="right">
+            <Dropdown item trigger={<span><Icon name="info"/>Error/Warnings</span>}>
+              <Dropdown.Menu>
+                <Dropdown.Item color="red">Errors</Dropdown.Item>
+                <Dropdown.Item color="orange">Warnings</Dropdown.Item>
+                <Dropdown.Item color="yellow">Information</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+            <Menu.Item name="XML Mode" icon="code" onClick={this.handleLockClick} />
+            <Menu.Item>
+              <Button primary><Icon name="check"/>Validate Envionment</Button>
+            </Menu.Item>
+          </Menu.Menu>
+        </Menu>
     )
   }
 }
