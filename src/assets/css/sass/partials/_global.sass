@@ -58,17 +58,16 @@ h3, p
 //     bottom: 0;
 //     height: 100% !important;
 
-nav
+.treeContainer
     width: 17%;
     height: 100% !important;
     background-color: $primary;
     color: $white;
     overflow-y: auto;
     overflow-x: hidden;
-    position: fixed;
-    top: 0;
-    left: 30;
     bottom: 0;
+    left: 80px;
+    position: absolute;
 
 section
     border-bottom: solid 1px darken($primary, 10%);
@@ -106,15 +105,36 @@ section
 .content
     margin: 20px 0 0 0px;
     padding: 0 0 0 0px;
-    width: 100%;
+    position: absolute;
+    width: 75%;
+    left: 22%;
     color: $contentFontColor;
 
 /*-------------------UTILITY BAR-------------*/
     
-.fixedUtilityBar
-    margin: 20px 0 0 0;
-    position: fixed;
-    top: 20;
+.utilityBar
+    width: 80px;
+    // padding: 30px;
+    background: #171d1f;
+    position: relative;
+    float: left;
+    height: 100% !important;
+
+.iconContainer
+    padding-top: 20px;
+    text-align: center;
+    color: #fff;
+    font-size: 12px;
+
+.iconDescription
+    font-size: 11px;
+    width: 70px;
+    line-height: 11px;
+    color: #fff;
+    text-align: center;
+    padding-top: 5px;
+    margin-left: 3px;
+
 
 /*------------------ BANNER ------------------*/
 

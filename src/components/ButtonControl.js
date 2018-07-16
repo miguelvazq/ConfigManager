@@ -6,6 +6,7 @@ export default class ButtonControl extends React.Component {
         super(props);
         this.state = {
         }
+        this.onClick = this.onClick.bind(this);
     }
 
     onClick(event, data) {

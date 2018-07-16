@@ -27,17 +27,11 @@ class Environment extends React.Component {
 
     render() {
         return (
-			<Grid>
-                <Grid.Row>
-                    <Grid.Column width={3}>
-                        <Navigation onClick={this.onUpdate} />
-                    </Grid.Column>
-                    <Grid.Column width={12}>
-                        <UtilityBar/>
-                        {this.state.childID !== "" ? <Content data={this.state.childID} breadCrumb={this.state.breadCrumb} /> : null }
-                    </Grid.Column>
-                </Grid.Row>
-            </Grid>
+            <div className="container">
+                <UtilityBar />
+                <Navigation onClick={this.onUpdate} />    
+                {this.state.childID !== "" ? <Content data={this.state.childID} breadCrumb={this.state.breadCrumb} /> : null }
+            </div>
         )
     }
 }
