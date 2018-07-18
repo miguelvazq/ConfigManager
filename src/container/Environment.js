@@ -28,9 +28,13 @@ class Environment extends React.Component {
     render() {
         return (
             <div className="container">
-                <UtilityBar />
-                <Navigation onClick={this.onUpdate} />    
-                {this.state.childID !== "" ? <Content data={this.state.childID} breadCrumb={this.state.breadCrumb} /> : null }
+                <div className="navContainer">
+                    <UtilityBar />
+                    <Navigation onClick={this.onUpdate} />
+                </div>
+                <div className="contentContainer">
+                    {this.state.childID !== "" ? <Content data={this.state.childID} breadCrumb={this.state.breadCrumb} /> : null }
+                </div>
             </div>
         )
     }

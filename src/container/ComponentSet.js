@@ -3,7 +3,7 @@ import shortid from 'shortid';
 import CheckBoxControl from '../components/CheckBoxControl';
 import InputControl from '../components/InputControl';
 import DropdownControl from '../components/DropdownControl';
-import { Form, Grid } from 'semantic-ui-react';
+import { Form } from 'semantic-ui-react';
 
 
 class ComponentSet extends React.Component {
@@ -40,16 +40,16 @@ class ComponentSet extends React.Component {
             switch (controlToImport) {
                 case "string":
                 case "integer":
-                    imported.push(<Form.Group key={shortid.generate()}><Form.Field required={type.Required} width={8}><label>{type.DisplayName}</label><InputControl type={controlToImport === "string" ? "text" : "number"} required={type.Required} placeholder={type.DisplayName} defaultValue={type.CurrentValue} tooltip={type.Tooltip} /></Form.Field></Form.Group>);
+                    imported.push(<Form.Group key={shortid.generate()} inline><Form.Field required={type.Required}><label>{type.DisplayName}</label><InputControl type={controlToImport === "string" ? "text" : "number"} required={type.Required} placeholder={type.DisplayName} defaultValue={type.CurrentValue} tooltip={type.Tooltip} /></Form.Field></Form.Group>);
                     break;
                 case "boolean":
-                    imported.push(<Form.Group key={shortid.generate()}><Form.Field width={8}><label>{type.DisplayName}</label><CheckBoxControl checked={type.CurrentValue === "true" ? true : false} tooltip={type.Tooltip}/></Form.Field></Form.Group>);
+                    imported.push(<Form.Group key={shortid.generate()} inline><Form.Field><label>{type.DisplayName}</label><CheckBoxControl checked={type.CurrentValue === "true" ? true : false} tooltip={type.Tooltip}/></Form.Field></Form.Group>);
                     break;
                 case "list":
-                    imported.push(<Form.Group key={shortid.generate()}><Form.Field required={type.Required} width={8}><label>{type.DisplayName}</label><DropdownControl options={type.Type.Limits.ChoiceList.Choice} onChange={this.handleDropDownChange} /></Form.Field></Form.Group>);
+                    imported.push(<Form.Group key={shortid.generate()} inline><Form.Field required={type.Required}><label>{type.DisplayName}</label><DropdownControl options={type.Type.Limits.ChoiceList.Choice} onChange={this.handleDropDownChange} /></Form.Field></Form.Group>);
                     break;
                 default:
-                    imported.push(<Form.Group key={shortid.generate()}><Form.Field required={type.Required} width={8}><label>{type.DisplayName}</label><InputControl type="text" required={type.Required} placeholder={type.DisplayName} tooltip={type.Tooltip} /></Form.Field></Form.Group>);
+                    imported.push(<Form.Group key={shortid.generate()} inline><Form.Field required={type.Required} width={8}><label>{type.DisplayName}</label><InputControl type="text" required={type.Required} placeholder={type.DisplayName} tooltip={type.Tooltip} /></Form.Field></Form.Group>);
                     break;
             }
         });

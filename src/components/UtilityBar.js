@@ -19,7 +19,8 @@ export default class MenuExampleSizeSmall extends Component {
     // }
 
     handleLockClick (e, data) {
-        data.icon === "lock" ? this.setState({locked: "lock open", lockStatus: "Unlocked"}) : this.setState({locked: "lock", lockStatus: "Locked"});
+        console.log(data)
+        //data.icon === "lock" ? this.setState({locked: "lock open", lockStatus: "Unlocked"}) : this.setState({locked: "lock", lockStatus: "Locked"});
     }
 
   render() {
@@ -53,7 +54,7 @@ export default class MenuExampleSizeSmall extends Component {
           <div className="iconDescription">validate</div>
         </div>
         <div className="iconContainer">
-          <Icon size="large" icon="copy" link name='copy' inverted color='blue'/>  
+          <Icon size="large" icon="copy" link name='copy' inverted color='blue'/> 
         </div>
           <div className="iconDescription">compare environments</div>
       </div>
