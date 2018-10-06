@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import {Icon, Popup, Button} from "semantic-ui-react"
+import axios from "axios";
 import DialogControl from './DialogControl';
 
 export default class MenuExampleSizeSmall extends Component {
@@ -19,7 +20,12 @@ export default class MenuExampleSizeSmall extends Component {
     // }
 
     handleLockClick (e, data) {
-        console.log(data)
+      const getEnvironments = axios.get(URL+"/LockSession.json", {
+        params:{
+          SessionId: sessionID
+        }
+    });  
+      console.log(data)
         //data.icon === "lock" ? this.setState({locked: "lock open", lockStatus: "Unlocked"}) : this.setState({locked: "lock", lockStatus: "Locked"});
     }
 
@@ -30,7 +36,7 @@ export default class MenuExampleSizeSmall extends Component {
     return (
       <div className="utilityBar">
         <div className="iconContainer">
-          <Icon size="large" icon={this.state.locked} link name={this.state.locked} inverted color='blue' onClick={this.handleLockClick}/> 
+          <Icon size="large" icon={this.state.locked} link name={this.state.locked} inverted color='blue' onClick={this.handleLockClick}/>
           <div className="iconDescription">locked</div>
         </div>
         <div className="iconContainer">

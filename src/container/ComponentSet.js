@@ -5,7 +5,6 @@ import InputControl from '../components/InputControl';
 import DropdownControl from '../components/DropdownControl';
 import { Form } from 'semantic-ui-react';
 
-
 class ComponentSet extends React.Component {
     constructor(props) {
         super(props);

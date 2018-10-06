@@ -16,7 +16,8 @@ export default class Entry extends React.Component{
             environmentSelected: false,
             wizardEnvironment: false,
             blankEnvironment: false,
-            defaultValue: ['environment.xml']
+            defaultValue: ['environment.xml'],
+            valueSelected: ""
         }
         this.onFileChange = this.onFileChange.bind(this);
         //this.handleWizardEnvironment = this.handleWizardEnvironment.bind(this);
@@ -52,7 +53,8 @@ export default class Entry extends React.Component{
     onFileChange(data) {
         if (data) {
             this.setState({
-                environmentSelected: true
+                environmentSelected: true,
+                valueSelected: data
             });
         }
     }
@@ -82,7 +84,8 @@ export default class Entry extends React.Component{
                 });
                 Promise.all(files).then((response) => {
                     this.setState({
-                        environments: response
+                        environments: response,
+                        sessionID: sessionID
                     });
                 });
             }
@@ -90,7 +93,6 @@ export default class Entry extends React.Component{
             console.log (e)
         }
     }
-
 
     render() {
         return (

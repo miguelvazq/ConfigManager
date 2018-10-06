@@ -105,13 +105,11 @@ class Navigation extends React.Component {
     render() {
         return (
             <nav>
-                
-                    <section className="logo"><div className="logoContainer">CM</div><span>Configuration Manager</span></section>
-                    <section className="configuring"><span>Currently editing: </span>
-                        <DropdownControl defaultValue='environment.xml' options={[{ key: 'env1', Value: 'environment.xml', text: 'environment.xml' },{ key: 'env2', Value: 'environment2.xml', text: 'environment2.xml' }] }  onChange={this.handleOnEnvironmentChange}/>
-                    </section>
-                    <TreeMenu data={this.state.data} onClick={this.subMenuCallback}  />
-                
+                <section className="logo"><div className="logoContainer">CM</div><span>Configuration Manager</span></section>
+                <section className="configuring"><span>Currently editing: </span>
+                    <DropdownControl placeholder="envrionment.xml" defaultValue='environment.xml' options={[{ key: 'env1', Value: 'environment.xml', text: 'environment.xml' },{ key: 'env2', Value: 'environment2.xml', text: 'environment2.xml' }] }  onChange={this.handleOnEnvironmentChange}/>
+                </section>
+                <TreeMenu data={this.state.data} onClick={this.subMenuCallback}  />
             </nav>
         )
     }

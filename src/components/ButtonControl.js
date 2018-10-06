@@ -10,7 +10,8 @@ export default class ButtonControl extends React.Component {
     }
 
     onClick(event, data) {
-        this.props.onClick(data)
+        //this.props.onClick(data)
+        console.log(data)
     }
 
     render() {
