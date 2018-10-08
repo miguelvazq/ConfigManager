@@ -36,7 +36,7 @@ export default class Content extends React.Component {
             const response = axios.get(URL, {
                 params: {
                     NodeId: nodeId,
-                    SessionId: "39"
+                    SessionId: this.props.sessionId
                 }
             });
             return await response;

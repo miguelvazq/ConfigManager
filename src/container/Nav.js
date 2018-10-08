@@ -20,11 +20,12 @@ class Navigation extends React.Component {
     }
 
     async componentDidMount() {
+        const session = this.props.sessionId;
         var data = {};
         var getNavigation = axios.get(URL, {
             params: {
-                NodeId: "1",
-                SessionId: "39",
+                NodeId: this.props.rootNodeId,
+                SessionId: session,
                 IncludeAttributes: false,
                 NumLevels: 2
             }

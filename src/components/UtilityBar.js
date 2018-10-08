@@ -2,6 +2,9 @@ import React, { Component } from "react"
 import {Icon, Popup, Button} from "semantic-ui-react"
 import axios from "axios";
 import DialogControl from './DialogControl';
+import MessageControl from './MessageControl';
+
+const URL = "http://10.239.20.71:8020/ws_config2"
 
 export default class MenuExampleSizeSmall extends Component {
     constructor(props) {
@@ -13,6 +16,7 @@ export default class MenuExampleSizeSmall extends Component {
             lockStatus: "locked"
         }
         this.handleLockClick = this.handleLockClick.bind(this);
+        this.handleValidateClick = this.handleValidateClick.bind(this);
     }
 
     // handleItemClick (e, { name }) {
@@ -21,18 +25,33 @@ export default class MenuExampleSizeSmall extends Component {
 
     handleLockClick (e, data) {
       const getEnvironments = axios.get(URL+"/LockSession.json", {
-        params:{
-          SessionId: sessionID
+          params:{
+            SessionId: this.props.sessionId
+          }
+      }).then(function (response){
+        if (response.data.LockSessionResponse.SessionLockKey) {
+          this.setState({
+            locked: "lock open"
+          });
         }
+      });  
+    }
+
+    handleValidateClick (e, data) {
+      const getEnvironments = axios.get(URL+"/ValidateEnvironment.json", {
+        params:{
+          SessionId: this.props.sessionId
+        }
+    }).then(function (response){
+      if (response.data.StatusResponse.Status.Error) {
+        <MessageControl status={response.data.StatusResponse.Status.Messages.StatusMsg.length + "issues found"}  
+         message="The following issues are warnings" header="Warnings"
+        />
+      }
     });  
-      console.log(data)
-        //data.icon === "lock" ? this.setState({locked: "lock open", lockStatus: "Unlocked"}) : this.setState({locked: "lock", lockStatus: "Locked"});
     }
 
   render() {
-    // const utilityBarStyle = {
-    //   margin: '20px 0 0 0',
-    // };
     return (
       <div className="utilityBar">
         <div className="iconContainer">
@@ -56,7 +75,7 @@ export default class MenuExampleSizeSmall extends Component {
           <div className="iconDescription">xml mode</div>
         </div>
         <div className="iconContainer">
-          <Icon size="large" icon="check" link name='check' inverted color='blue'/>
+          <Icon size="large" icon="check" link name='check' inverted color='blue' onClick={this.handleValidateClick}/>
           <div className="iconDescription">validate</div>
         </div>
         <div className="iconContainer">

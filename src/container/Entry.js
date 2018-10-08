@@ -4,7 +4,7 @@ import { Form, Grid, Image, Divider } from "semantic-ui-react"
 import ButtonControl from '../components/ButtonControl';
 import DropdownControl from '../components/DropdownControl';
 import homeIcon from "../assets/img/hpcc-logo.png";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const URL = "http://10.239.20.71:8020/ws_config2"
 
@@ -17,7 +17,8 @@ export default class Entry extends React.Component{
             wizardEnvironment: false,
             blankEnvironment: false,
             defaultValue: ['environment.xml'],
-            valueSelected: ""
+            valueSelected: "",
+            sessionID: ""
         }
         this.onFileChange = this.onFileChange.bind(this);
         //this.handleWizardEnvironment = this.handleWizardEnvironment.bind(this);
@@ -59,22 +60,23 @@ export default class Entry extends React.Component{
         }
     }
 
-
     async componentDidMount() {
         const files = [];
         const openSession = axios.get(URL+"/OpenSession.json", {});
         try {
             let response = await openSession;
             if (response.data.OpenSessionResponse.SessionId) {
-                const sessionID = response.data.OpenSessionResponse.SessionId;
+                this.setState({
+                    sessionID: response.data.OpenSessionResponse.SessionId
+                })
                 const getEnvironments = axios.get(URL+"/GetEnvironmentFileList.json", {
                     params:{
-                        SessionId: sessionID
+                        SessionId: this.state.sessionID
                     }
                 });
                 const environmentResponse = await getEnvironments;
                 const environmentList = environmentResponse.data.GetEnvironmentListResponse.EnvironmentFiles.EnvironmentFile
-                environmentList.map((file) =>{
+                environmentList.map((file) => {
                     files.push({
                         Text: file.Filename,
                         Value: file.Filename,
@@ -84,8 +86,7 @@ export default class Entry extends React.Component{
                 });
                 Promise.all(files).then((response) => {
                     this.setState({
-                        environments: response,
-                        sessionID: sessionID
+                        environments: response
                     });
                 });
             }
@@ -120,7 +121,10 @@ export default class Entry extends React.Component{
                                         <input /*disabled={this.state.blankEnvironment}*/ disabled="true" placeholder="Enter file name" onClick={this.onChange} />
                                         {/* <InputControl label="Create blank environment" disabled={this.state.blankEnvironment} placeholder="Enter file name" onChange={this.onChange} /> */}
                                     </Form.Field>
-                                    <NavLink to="/environment"><ButtonControl disabled={!this.state.environmentSelected} type="submit" color="blue" floated="right" text="Next" onClick={this.props.onClick}></ButtonControl></NavLink>
+                                    <Link to={{
+                                        pathname: "/environment",
+                                        state: {sessionId: this.state.sessionID, environmentSelected: this.state.valueSelected, environments: this.state.environments}
+                                    }}><ButtonControl disabled={!this.state.environmentSelected} type="submit" color="blue" floated="right" text="Next" onClick={this.props.onClick}></ButtonControl></Link>
                                 </Form>
                             </Grid.Column>
                         </Grid.Row>
